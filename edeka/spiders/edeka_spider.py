@@ -2,25 +2,25 @@
 import scrapy
 import unicodedata
 
-import os, sys
-from bs4 import BeautifulSoup
-from selenium import webdriver
-import selenium
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import urllib
-import time
+# import os, sys
+# from bs4 import BeautifulSoup
+# from selenium import webdriver
+# import selenium
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# import urllib
+# import time
 
-import datetime
-from datetime import timedelta
-from selenium.webdriver.support.ui import Select
-import re
-from pyvirtualdisplay import Display
-import json
-import csv
-import hashlib
+# import datetime
+# from datetime import timedelta
+# from selenium.webdriver.support.ui import Select
+# import re
+# from pyvirtualdisplay import Display
+# import json
+# import csv
+# import hashlib
 
 
 class EdekaSpiderSpider(scrapy.Spider):
@@ -61,6 +61,6 @@ class EdekaSpiderSpider(scrapy.Spider):
 
 
 		print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-		print detail_content
+		print detail_result
 		print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
 		
