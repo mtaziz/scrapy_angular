@@ -24,7 +24,7 @@
 		</p>
 		<ul class="list-unstyled list-inline" ng-controller="DeliveryRegionForceOpenModalController">
 			<li ng-controller="deliveryRegionController"><a ng-click="showDeliveryRegionModal()" href="javascript:;"> <span class="icon icon-arrow-right"></span> Unser Liefergebiet</a></li>
-			<li><form action="/boecker/_hn:action%7Cr9_r1_r3_r4%7C/products?query=3090291386041&amp;r9_r1_r3_r4:action=SHOP_SELECTION" method="post" id="resetStore">
+			<li><form action="/boecker/_hn:action%7Cr20_r1_r2_r5%7C/products/fol-epi-classic-50-fett-i-tr-150g-109511?r20_r1_r2_r5:action=SHOP_SELECTION" method="post" id="resetStore">
 					<a href="javascript:;" onclick="document.getElementById('resetStore').submit();"> <i class="icon icon-arrow-right"></i> Zur Marktauswahl</a>
 				</form></li>
 		</ul>
@@ -33,7 +33,7 @@
     <div class="form-group form-group-lg form-search">
         <div edeka-click-outside="hide()" class="col-xs-12">
             <div class="input-group input-group-lg">
-                <input ng-model="searchQuery" ng-change="suggest()" ng-init="searchQuery = '3090291386041'" ng-model-options="{ debounce: 200 }" id="productsearch" class="form-control input-lg" type="search" name="query" placeholder="Suchbegriff oder Artikelnamen eingeben" value="3090291386041" autocomplete="off">
+                <input ng-model="searchQuery" ng-change="suggest()" ng-init="searchQuery = ''" ng-model-options="{ debounce: 200 }" id="productsearch" class="form-control input-lg" type="search" name="query" placeholder="Suchbegriff oder Artikelnamen eingeben" value="" autocomplete="off">
             	<span class="input-group-btn">
 		        	<button type="submit" class="btn btn-primary">
 		        		<span class="icon icon-loupe"></span>
@@ -1618,184 +1618,328 @@
         </div>
     </nav>
 </div>
-</div>
+<div id="breadcrumb">
+    <a class="iconlink-arrow-left" href="javascript:history.back();">Zurück</a>
+    
+   	<ol>
+    	<li><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte">Kühlprodukte</a></li>
+            	<li><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte">Eier, Käse &amp; Molkereiprodukte</a></li>
+            	<li class="active"><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1K%C3%A4se">Käse</a></li>
+            	</ol>
+</div></div>
 </header>
-<section id="content" class="content-category">
-    <div class="content-element">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-4">
-                    <h1>Hauptkategorien<span> (1)</span></h1>
-                </div>
-                <div class="col-lg-8 col-md-8 col-xs-8 right">
-                    <div class="pagination_holder pagination_top">
-                        <div class="form-group">
-                            <span class="pagination_text hidden-xs hidden-sm">
-                                Artikel pro Seite</span>
-                            <span class="pagination_text visible-xs visible-sm">
-                                Artikel/Seite</span>
-                            <div class="dropdown">
-                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
-                                    20<span class="icon icon-arrow-down"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=20">20</a></li>
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=50">50</a></li>
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=100">100</a></li>
-                                    </ul>
-                            </div>
-                            <span class="pagination_text hidden-xs hidden-sm">
-                                Sortieren nach:</span>
-                            <span class="pagination_text visible-xs visible-sm">
-                                Sortieren:</span>
-                            <div class="dropdown">
-                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
-                                   -<span class="icon icon-arrow-down"></span>
-                                </button>
-                                
-                                
-                                <ul class="dropdown-menu">
-                    
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041">-</a></li>
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productArtikelbezeichnung">A-Z</a></li>
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productPriceIncTax">Preis</a></li>
-                                	</ul>
-                            </div>
-                            <ul class="pagination">
-        <li class="disabled">
-                    <span>
-                        <i class="icon icon-arrow-left"></i>
-                        <span class="hidden-xs hidden-sm">
-                            zurück</span>
-                    </span>
-                </li>
-            <li class="active">
-                        <span>
-                            1</span>
-                    </li>
-                <li class="disabled">
-                    <span>
-                        <span class="hidden-xs hidden-sm">
-                            weiter</span>
-                        <i class="icon icon-arrow-right"></i>
-                    </span>
-                </li>
-            </ul>
-</div>
-                    </div>
-                </div>
-            </div>
+<!-- START The content section -->
+<section id="content" class="content-pds">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-lg-6">
 
-            <div class="row filter-row">
-                <div class="filter-reset col-xs-4 col-md-2 col-lg-2">
-                	<a href="/boecker/products?query=3090291386041" class="iconlink-close">
-                        Alle Filter zurücksetzen</a>
-                </div>
-				
-				<div class="filter-chosen col-xs-8 col-md-10 col-lg-10">
-                	<span>Gewählte Filter:</span>
-                  	<div>
-                       	</div>
-                </div>
-            </div>
-
-            <div class="row">
-                <form id="filter" class="product-filter col-xs-4 col-md-2 col-lg-2" method="get" ng-non-bindable>
-					<input type="hidden" name="categoryFilter" value="">
-					<input type="hidden" name="query" value="3090291386041">
-                    <div class="filter-categories">
-                        <div class="filter-header filter-categories-name">
-                            <p>Hauptkategorien</p>
-                        </div>
-                        <div class="filter-header">    
-                            </div>
-
-                        <ul class="list-unstyled">
-                        	<li><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte&amp;query=3090291386041">Kühlprodukte<span> (1)</span></a></li>
-                        	</ul>
-                    </div>
-
-                    <div class="filter-brand">
-                        <div class="filter-header">
-                            <span>Marke</span>
-                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
-                                löschen</a>
-                        </div>
-
-                        <ul id="brands-list" class="list-unstyled show-first" data-show-first-count="8" data-show-first-control-template='&lt;li&gt;&lt;a class="iconlink-plus show-first-control" href="#"&gt;Mehr Auswahl&lt;/a&gt;&lt;/li&gt;'>
-                        	<li>
-	                                <div class="form-group">
-	                                    <div class="checkbox">
-	                                        <input type="checkbox" id="shopMarkeFilter0" onchange="this.form.submit()" name="shopMarkeFilter" value="Fol Epi">
-	                                        <label for="shopMarkeFilter0">Fol Epi<span> (1)</span></label>
-	                                    </div>
-	                                </div>
-	                            </li>
-                        	</ul>
-                    </div>
-                    
-                    <div class="filter-angebote">
-                    	<div class="filter-header">
-                    		<span>Meine Produkte</span>
-                        	<a class="iconlink-close" href="/boecker/products?query=3090291386041">
-                            	löschen</a>
+                <div class="media">
+                <div id="slider" class="flexslider">
+	                    	<ul class="slides">
+                       		<li class="product-detail-items product-bio">
+                               			<img src="/product-images/product-images/epim/20150707201322200/image496x496" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                               </li>
+                       		</ul>
                     	</div>
-                        <ul class="list-unstyled show-first">
-                            <li>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <input type="checkbox" id="frequentlyOrderedFilter" name="frequentlyOrderedFilter" onchange="this.form.submit()" value="true">
-                                        <label for="frequentlyOrderedFilter">häufig bestellt<span></span></label>
-                                    </div>
+
+	                    <div id="carousel" class="flexslider flexcarousel">
+		                    <ul class="slides thumbs">
+		                    	<li>
+	                                     <img src="/product-images/product-images/epim/20150707201322200/image84x84" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+	                                 </li>
+	                         		</ul>
+	                   	</div>
+                   
+                   </div>
+
+            </div>
+            <div edeka-product-teaser product='{"productId":109511,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"2,19 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,46 €","specialOfferGrundpreisIncTax":null}' class="col-xs-6 col-lg-6 product-desc">
+            	
+            	 <div edeka-modal="gewichtsartikelAlreadyInBasketModal109511" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+            	
+            	<span>Artikelnr. 32106083074</span>
+                <h1 class="product-title">Fol Epi Classic 50% Fett i.Tr.150g</h1>
+                <div class="short-info">
+                    <div class="base-price">
+						Grundpreis: 1.46 € / 100 g</div>
+               <br>
+					<div class="base-price">
+					    </div>
+                    <ul>
+                    	</ul>
+                    <div>
+                     	</div>
+                </div>
+                <div class="action">
+                    <div class="inline-block bottom">
+                    	<div>
+	                   		</div>
+                  		<div class="price-holder price-lg">
+							<div class="price-before" ng-show="specialOffer" ng-bind="priceIncTax"></div>
+							<div class="price right"><span ng-bind="priceToShow | pricePreCommaPlaces"></span><span class="cents" ng-bind="priceToShow | priceDecimalPlaces"></span></div>
+						</div>
+
+						<div class="hint">
+ 							Preise inkl. gesetzlicher MwSt. zzgl. 
+                        	<a ng-controller="deliveryWindowOpenViewController" ng-click="openDeliveryWindowView()" href="javascript:;">
+                                Liefer-/ Abholgebühr</a>
+                        </div>
+                    </div>
+                    <div class="inline-block top">
+                        <div class="stepper">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input disabled" type="button" data-stepper="down">
+                                        <span class="glyphicons glyphicon-minus"></span></button><input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-stepper-big" type="text" value="1"><button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input" type="button" data-stepper="up"><span class="glyphicons glyphicon-plus"></span>
+                                    </button>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
+                        <button ng-click="addToBasket()" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top" class="btn btn-primary btn-to-cart">
+                            In den Warenkorb <span class="icon icon-cart">
+                        </span></button>
                     </div>
-                    
-                    <div class="filter-price">
-                        <div class="filter-header">
-                            <span>Preis in €</span>
-
-                            
-                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
-                            	löschen</a>
-                        </div>
-
-                        <div class="form-group input-group-sm clearfix">
-                            <input type="text" id="filter-price-range-start" class="form-control pull-left" maxlength="10" name="minPrice" value="">
-                            <span>bis:</span>
-                            <input type="text" id="filter-price-range-end" class="form-control pull-right" maxlength="10" name="maxPrice" value="">
-                        </div>
-
-                        <div class="form-group">
-                        	<button type="submit" class="btn btn-primary btn-xs">aktualisieren</button>
-                        </div>
+                </div>
+                <ul class="clean link-list">
+                	</ul>
+            </div>
+        </div>
+        <div class="tab-container">
+        	<ul class="nav nav-tabs table nav-stacked" role="tablist">
+	            <li class="active"><a href="#artikelDetails" role="tab" data-toggle="tab">Artikeldetails</a></li>
+	            	<li><a href="#naehrstoffe" role="tab" data-toggle="tab">Nährwertangaben / Vitamine</a></li>
+	            	<li><a href="#inhaltstoffe" role="tab" data-toggle="tab">Zutaten / Allergene</a></li>
+	            	</ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="artikelDetails">
+                    <div class="tab-wrap">
+	            		<table class="table-striped disabled">
+							<tbody>
+								<tr>
+									<td>Beschreibung</td>
+									<td>
+										<p>Fol Epi Classic 50% Fett i.Tr.150g</p>
+										<p>nussig-mild</p>
+											<p>zartschmelzend</p>
+											<p>von Natur aus laktosefrei</p>
+											<p>von Natur aus glutenfrei</p>
+											<p></p>
+										<p></p>
+										<p></p>
+										<p></p>
+										<p></p>
+										<p>50% Fett i. Tr. Unter Schutzatmosphäre verpackt.</p>
+									</td>
+								</tr>
+								<tr>
+									<td>Marke</td>
+									<td>Fol Epi</td>
+								</tr><tr>
+									<td>Verkaufsinhalt</td>
+									<td>
+										150g</td>
+								</tr><tr>
+									<td>Verarbeitungshinweis</td>
+									<td>***Verzehrfertig*** Verzehrfertig</td>
+								</tr><tr>
+									<td>Aufbewahrungshinweise</td>
+									<td>Bei +2°C bis +8°C lagern. Nach dem Öffnen alsbald verzehren.</td>
+								</tr><tr>
+										<td>Verantwortlicher Lebensmittelunternehmer</td>
+										<td>
+											Fromagerie Perreault</td>
+									</tr>
+								</tbody>
+						</table>
                     </div>
-
-                    <div class="filter-angebote">
-	                        <div class="filter-header">
-	                            <span>Angebote</span>
-	                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
-	                                löschen</a>
-	                        </div>
-	                        <ul class="list-unstyled show-first">
-	                            <li>
-	                                <div class="form-group">
-	                                    <div class="checkbox angebot-filter">
-	                                        <input type="checkbox" id="angebotFilter" name="angebotFilter" onchange="this.form.submit()" disabled value="true">
-	                                        <label for="angebotFilter">Angebote<span> (0)</span></label>
-	                                    </div>
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </div>
-                    </form>
-                <div class="product-list col-xs-8 col-md-10 col-lg-10 ">
-                    <div edeka-product-teaser product='{"productId":109511,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"2,19 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,46 €","specialOfferGrundpreisIncTax":null}' class="product-item
-                                    ">
-
-						<div edeka-modal="gewichtsartikelAlreadyInBasketModal109511" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
-							<div class="modal-dialog modal-max">
+                </div>
+				<div class="tab-pane fade" id="naehrstoffe">
+	            	<div class="tab-wrap">
+		            	<div class="row">
+	            			<div class="col-md-6">
+			            		<table class="table-striped">
+									<thead>
+										<tr>
+											<th>Nährwertangaben</th>
+											<th>je 100 g (unzubereitet)</th>
+											<th>je Portion (unzubereitet)</th>
+											</tr>
+									</thead>
+										<tbody>
+											<!-- Brennwert / Energie -->
+											<tr>
+												<td>
+													Energie (in kJ/kcal)</td>
+												<td>
+														1.461
+														/
+														352</td>
+												<td>
+														307
+														/
+														74</td>
+												</tr>
+											<!-- fett -->
+											<tr>
+												<td>
+													Fett (in g)</td>
+												<td>
+																28</td>
+														<td>
+																5,9</td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon gesättigte Fettsäuren</td>
+												<td>
+																19</td>
+														<td>
+																4</td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon einfach ungesättigte Fettsäuren</td>
+												<td> - </td>
+														<td> - </td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon mehrfach ungesättigte Fettsäuren</td>
+												<td> - </td>
+														<td> - </td>
+														</tr>
+											<!-- kohlenhydrate -->
+											<tr>
+												<td>
+													Kohlenhydrate (in g)</td>
+												<td>
+																0,5</td>
+														<td>
+																0,1</td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon Zucker</td>
+												<td>
+																0,5</td>
+														<td>
+																0,1</td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon mehrwertige Alkohole</td>
+												<td> - </td>
+														<td> - </td>
+														</tr>
+											<tr>
+												<td class="sub">
+													davon Stärke</td>
+												<td> - </td>
+														<td> - </td>
+														</tr>
+											<!-- ballaststoffe -->
+											<tr>
+												<td>
+													Ballaststoffe (in g)</td>
+												<td> - </td>
+														<td> - </td>
+														</tr>
+											<!-- Eiweiss -->
+											<tr>
+												<td>
+													Eiweiß (in g)</td>
+												<td>
+															25</td>
+													<td>
+															5,3</td>
+													</tr>
+											<!-- Salz -->
+											<tr>
+												<td>
+													Salz (in g)</td>
+												<td>
+																1,2</td>
+														<td>
+																0,25</td>
+														</tr>
+										</tbody>
+									</table>
+				            		<br>
+			            		</div>
+			            		<div class="col-md-6">
+				            		<table class="table-striped">
+										<thead>
+											<tr>
+												<th>Vitamin</th>
+												<th>je 100 g (unzubereitet) / RDA (in %)</th>
+												<th>je Portion (unzubereitet) / RDA (in %)</th>
+												</tr>
+										</thead>
+										<tbody>
+										<tr>
+												<td>Kalzium (in mg)</td>
+												<td>
+																760
+																/ 
+																95</td>
+														<td>
+																160
+																/ 
+																0</td>
+														</tr>
+										</tbody>
+									</table>
+			            		</div>
+			            		</div>
+						</div>
+	                </div>
+				<div class="tab-pane fade" id="inhaltstoffe">
+                    	<div class="tab-wrap">
+                    		<p>Zutaten: pasteurisierte KUHMILCH, Speisesalz, Käsereikulturen, Farbstoffe (in der Rinde): Annatto, einfaches Zuckerkulör.</p>
+        	  				<p></p>
+            	   			<p>Allergene: 
+                        			Milch und daraus hergestellte Erzeugnisse (einschließlich Laktose).</p>
+ 	           				<p></p>
+               				<p>Zusatzstoffe: 
+                        			Annatto (Bixin, Norbixin), Zuckerkulör.</p>
+ 	           				</div>
+                	</div>
+        		</div>
+        </div><div class="row recommendations">
+            <div class="col-xs-12">
+                <h2>Unsere Empfehlung</h2>
+                <div class="product-list">
+                <div class="product-item  ">
+						<div edeka-product-teaser product='{"productId":110588,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"2,09 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,39 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal110588" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
     <div class="modal-content">
     	<div class="modal-header clearfix">
         	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
@@ -1822,29 +1966,27 @@
 </div>
                             <div class="product-flag-holder">
                             	</div>
-                            <a class="img-holder" href="/boecker/products/fol-epi-classic-50-fett-i-tr-150g-109511">
-                                <img src="/product-images/product-images/epim/20150707201322200/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                            <a class="img-holder" href="/boecker/products/kerrygold-original-irischer-cheddar-mild-wuerzig-50-150g-110588">
+                                <img src="/product-images/product-images/epim/20150707221911024/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
                                     </a>
-
-							<div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
-	                        	
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
                             	<div class="product-label label-empty"> </div>
-                            	<a class="product-title" href="/boecker/products/fol-epi-classic-50-fett-i-tr-150g-109511">
-                                   <strong>Fol Epi Classic 50% Fett i.Tr.150g</strong>
+                            	<a class="product-title" href="/boecker/products/kerrygold-original-irischer-cheddar-mild-wuerzig-50-150g-110588">
+                                   <strong>Kerrygold Original Irischer Cheddar mild würzig 50% 150g</strong>
                                 </a>
                                 <div class="base-price">
-	                                		Grundpreis: 1.46 € / 100 g</div>
+	                                		Grundpreis: 1.39 € / 100 g</div>
 	                                <div class="base-price">
 								    </div>
 
-
                                 <div class="product-price">
-	                               	<edeka-product-price-holder></edeka-product-price-holder>
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
                                 </div>
 
                                 <div class="product-to-cart">
-
-                                <div class="stepper">
+                                
+                                	<div class="stepper">
                                         <div class="form-group">
                                             <div class="input-group input-group-sm">
                                                 <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
@@ -1864,92 +2006,375 @@
                                 </div>
                             </div>
                         </div>
-						<!--  EDEKA-1531: Teaser in Suchergebnissen bei definierten Kategorien -->
-					<!-- 
-                    <div class="product-item product-item-extend item-last-lg item-last-sm item-last-md ">
-                    	<img class="teaser-img" src="/img/teaser_bio.jpg" alt="Teaser Bio">
-	                        <div class="teaser-content">
-	                            <img alt="Biologo" src="/img/bio.png" class="bio-logo">
-	                            <div class="teaser-text">
-	                            <h2>Beste Bio Produkte</h2>
-	                            <p>
-	                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
-	                            </p>
-	                            </div>
-	                            <div class="teaser-link">
-	                                <a class="iconlink-arrow-right" href="#">Bio-Produkte</a>
-	                            </div>
-	                        </div>
-                    </div>
-                     -->
-                </div>
-            </div>
+                	</div>
+                <div class="product-item  ">
+						<div edeka-product-teaser product='{"productId":103370,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"1,69 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,13 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal103370" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
 
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-4">
-                </div>
-                <div class="col-lg-8 col-md-8 col-xs-8 right">
-                    <div class="pagination_holder pagination_bottom">
-                        <div class="form-group">
-                            <span class="pagination_text hidden-xs hidden-sm">
-                                Artikel pro Seite</span>
-                            <span class="pagination_text visible-xs visible-sm">
-                                Artikel/Seite</span>
-                            <div class="dropdown">
-                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
-                                    20<span class="icon icon-arrow-down"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=20">20</a></li>
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=50">50</a></li>
-                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=100">100</a></li>
-                                    </ul>
-                            </div>
-                            <span class="pagination_text hidden-xs hidden-sm">
-                                Sortieren nach:</span>
-                            <span class="pagination_text visible-xs visible-sm">
-                                Sortieren:</span>
-                            <div class="dropdown">
-                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
-                                   -<span class="icon icon-arrow-down"></span>
-                                </button>
-                                
-                                
-                                <ul class="dropdown-menu">
-                    
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041">-</a></li>
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productArtikelbezeichnung">A-Z</a></li>
-                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productPriceIncTax">Preis</a></li>
-                                	</ul>
-                            </div>
-                            
-                           <ul class="pagination">
-        <li class="disabled">
-                    <span>
-                        <i class="icon icon-arrow-left"></i>
-                        <span class="hidden-xs hidden-sm">
-                            zurück</span>
-                    </span>
-                </li>
-            <li class="active">
-                        <span>
-                            1</span>
-                    </li>
-                <li class="disabled">
-                    <span>
-                        <span class="hidden-xs hidden-sm">
-                            weiter</span>
-                        <i class="icon icon-arrow-right"></i>
-                    </span>
-                </li>
-            </ul>
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
 </div>
-                    </div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/bresso-frischkaese-kraeuter-der-provence-60-fett-i-tr-150g-103370">
+                                <img src="/product-images/product-images/epim/20150707190139741/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/bresso-frischkaese-kraeuter-der-provence-60-fett-i-tr-150g-103370">
+                                   <strong>Bresso Frischkäse Kräuter der Provence 60% Fett i.Tr. 150g</strong>
+                                </a>
+                                <div class="base-price">
+	                                		Grundpreis: 1.13 € / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+                                <div class="product-price">
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+                                
+                                	<div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+                <div class="product-item  ">
+						<div edeka-product-teaser product='{"productId":114098,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"1,19 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"0,60 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal114098" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/exquisa-frischkaese-natur-70-fett-i-tr-200g-114098">
+                                <img src="/product-images/product-images/epim/20150707210011359/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/exquisa-frischkaese-natur-70-fett-i-tr-200g-114098">
+                                   <strong>Exquisa Frischkäse natur 70% Fett i.Tr.200g</strong>
+                                </a>
+                                <div class="base-price">
+	                                		Grundpreis: 0.60 € / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+                                <div class="product-price">
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+                                
+                                	<div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+                <div class="product-item  ">
+						<div edeka-product-teaser product='{"productId":294314,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"1,55 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"0,78 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal294314" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/mibell-gouda-gerieben-45-200g-294314">
+                                <img src="/product-images/product-images/epim/20150707221605234/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/mibell-gouda-gerieben-45-200g-294314">
+                                   <strong>Mibell Gouda gerieben 45% 200g</strong>
+                                </a>
+                                <div class="base-price">
+	                                		Grundpreis: 0.78 € / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+                                <div class="product-price">
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+                                
+                                	<div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+                <div class="product-item  ">
+						<div edeka-product-teaser product='{"productId":113935,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"1,89 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"0,95 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal113935" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/st-mang-limburger-40-fett-i-tr-200g-113935">
+                                <img src="/product-images/product-images/epim/20150707180827409/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/st-mang-limburger-40-fett-i-tr-200g-113935">
+                                   <strong>St.Mang Limburger 40% Fett i.Tr.200g</strong>
+                                </a>
+                                <div class="base-price">
+	                                		Grundpreis: 0.95 € / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+                                <div class="product-price">
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+                                
+                                	<div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
+                <div class="product-item  item-last-sm  item-last-md  item-last-lg  ">
+						<div edeka-product-teaser product='{"productId":112391,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"2,69 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,35 €","specialOfferGrundpreisIncTax":"0,85 €"}' class="product-item
+                                     item-last-sm  item-last-md  item-last-lg ">
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModal112391" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/salakis-schafkaese-natur-48-fett-i-tr-200g-112391">
+                                <img src="/product-images/product-images/epim/20150707210104621/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+                            <div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/salakis-schafkaese-natur-48-fett-i-tr-200g-112391">
+                                   <strong>Salakis Schafkäse Natur 48% Fett i.Tr.200g</strong>
+                                </a>
+                                <div class="base-price">
+	                                    	Grundpreis: 0.85 €  / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+                                <div class="product-price">
+                                
+                                	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+                                
+                                	<div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                	</div>
                 </div>
             </div>
         </div>
     </div>
-</section><footer>
+</section>
+<!-- END Content Section -->
+
+<footer>
     <div class="container">
         <div class="footer-inner">
         	<div class="row"> 
