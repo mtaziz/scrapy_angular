@@ -83,11 +83,18 @@ class EdekaSpiderSpider(scrapy.Spider):
 		additives = ingredient_details_content.xpath(".//p[5]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")[15:]
 
 		# nutrients:// div#id: naehrstoffe
-		nutrients_details_content = detail_result.xpath(".//div[contains(@id, 'inhaltstoffe')]//div//div//div//table//tbody")
+		nutrients_details_content = detail_result.xpath(".//div[contains(@id, 'naehrstoffe')]//div//div//div//table//tbody")
 		nutrients = []
 
+		print "***************"
+		print nutrients_details_content
 		for item in nutrients_details_content.xpath(".//tr"):
-			print item.extract()
+			nutrientsItem = {}
+			nutrientsItem['name'] = item.xpath(".//td[1]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")
+			nutrientsItem['perUnit'] = item.xpath(".//td[2]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")
+			nutrientsItem['perPortion'] = item.xpath(".//td[3]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")
+
+			nutrients.append(nutrientsItem)
 			print "********************"
 
 
