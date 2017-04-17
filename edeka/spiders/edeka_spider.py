@@ -36,11 +36,11 @@ class EdekaSpiderSpider(scrapy.Spider):
 
 	def parse_shop(self, response, id=0):
 		
-		body_result = response.xpath("//body").extract()
+		# body_result = response.xpath("//body").extract()
 		
-		f = open('response.html', 'w')
-		f.write(body_result[0].encode('utf-8'))
-		f.close()
+		# f = open('response.html', 'w')
+		# f.write(body_result[0].encode('utf-8'))
+		# f.close()
 
 		body_content = response.xpath("//body")
 
@@ -53,14 +53,41 @@ class EdekaSpiderSpider(scrapy.Spider):
 		yield request
 
 	def parse_product_detail(self, response):
-		detail_result = response.xpath("//body").extract()
+		detail_result = response.xpath("//body")
 
-		f = open('detail_esponse.html', 'w')
-		f.write(detail_result[0].encode('utf-8'))
-		f.close()
+		# f = open('detail_esponse.html', 'w')
+		# f.write(detail_result[0].encode('utf-8'))
+		# f.close()
 
-
-		print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
-		print detail_result
-		print "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+		# item details
+		item_details_content = detail_result.xpath(".//div[contains(@id, 'artikelDetails')]//div//table//tbody//tr")
+		itemDetailData = []
 		
+		for i in item_details_content:
+			itemDetailData.append( i.xpath(".//td[2]") )
+
+		description = ""
+
+		for i in itemDetailData[0].xpath(".//p//text()").extract():
+			description += i.strip().encode('utf-8')
+
+		brand = itemDetailData[1].xpath(".//text()").extract()[0].encode('utf-8')
+		weight = itemDetailData[2].xpath(".//text()").extract()[0].encode('utf-8')
+		manufacture = itemDetailData[5].xpath(".//text()").extract()[0].encode('utf-8')
+
+		# ingredients and allergens:// div#id: inhaltstoffe
+		ingredient_details_content = detail_result.xpath(".//div[contains(@id, 'inhaltstoffe')]//div")
+
+		ingredient = ingredient_details_content.xpath(".//p[1]//text()").extract()[0].encode('utf-8')[9:]
+		allergens = ingredient_details_content.xpath(".//p[3]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")[12:]
+		additives = ingredient_details_content.xpath(".//p[5]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")[15:]
+
+		# nutrients:// div#id: naehrstoffe
+		nutrients_details_content = detail_result.xpath(".//div[contains(@id, 'inhaltstoffe')]//div//div//div//table//tbody")
+		nutrients = []
+
+		for item in nutrients_details_content.xpath(".//tr"):
+			print item.extract()
+			print "********************"
+
+
