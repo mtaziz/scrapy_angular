@@ -2,27 +2,6 @@
 import scrapy
 import unicodedata
 
-# import os, sys
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-# import selenium
-# from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# import urllib
-# import time
-
-# import datetime
-# from datetime import timedelta
-# from selenium.webdriver.support.ui import Select
-# import re
-# from pyvirtualdisplay import Display
-# import json
-# import csv
-# import hashlib
-
-
 class EdekaSpiderSpider(scrapy.Spider):
 	name = "edeka"
 	allowed_domains = ["edekanord-shop.de"]
@@ -60,6 +39,7 @@ class EdekaSpiderSpider(scrapy.Spider):
 		# f.close()
 
 		# item details
+		itemData = {}
 		item_details_content = detail_result.xpath(".//div[contains(@id, 'artikelDetails')]//div//table//tbody//tr")
 		itemDetailData = []
 		
@@ -72,8 +52,12 @@ class EdekaSpiderSpider(scrapy.Spider):
 			description += i.strip().encode('utf-8')
 
 		brand = itemDetailData[1].xpath(".//text()").extract()[0].encode('utf-8')
-		weight = itemDetailData[2].xpath(".//text()").extract()[0].encode('utf-8')
-		manufacture = itemDetailData[5].xpath(".//text()").extract()[0].encode('utf-8')
+		weight = itemDetailData[2].xpath(".//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")
+		manufacture = itemDetailData[5].xpath(".//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")
+
+		itemData['brand'] = brand
+		itemData['weight'] = weight
+		itemData['manufacture'] = manufacture
 
 		# ingredients and allergens:// div#id: inhaltstoffe
 		ingredient_details_content = detail_result.xpath(".//div[contains(@id, 'inhaltstoffe')]//div")
@@ -81,6 +65,10 @@ class EdekaSpiderSpider(scrapy.Spider):
 		ingredient = ingredient_details_content.xpath(".//p[1]//text()").extract()[0].encode('utf-8')[9:]
 		allergens = ingredient_details_content.xpath(".//p[3]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")[12:]
 		additives = ingredient_details_content.xpath(".//p[5]//text()").extract()[0].encode('utf-8').translate(None, " \n\t\r")[15:]
+
+		itemData['ingredient'] = ingredient
+		itemData['allergens'] = allergens
+		itemData['additives'] = additives
 
 		# nutrients:// div#id: naehrstoffe
 		nutrients_details_content = detail_result.xpath(".//div[contains(@id, 'naehrstoffe')]//div//div//div//table//tbody")
@@ -96,5 +84,9 @@ class EdekaSpiderSpider(scrapy.Spider):
 
 			nutrients.append(nutrientsItem)
 			print "********************"
+
+		itemData['nutrients'] = nutrients
+
+		return itemData
 
 
