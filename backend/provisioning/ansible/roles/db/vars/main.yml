@@ -1,4 +1,0 @@
----
-
-db_name: "{{ project_name }}"
-postgresql_version: 9.5

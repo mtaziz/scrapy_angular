@@ -1,5 +1,0 @@
-{
-    "aws_security_group_default_id": "sg-c2419daa", 
-    "aws_db_subnet_group_default_id": "fullstack_dev_subnet_group", 
-    "db_instance_address": "fullstack-rds-dev.csnayvmucqyb.eu-central-1.rds.amazonaws.com"
-}

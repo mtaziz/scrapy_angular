@@ -1,0 +1,2131 @@
+<body><a href="javascript:_etracker.openSurvey();"><span class="etracker_fb"></span></a>
+
+    
+        <header>
+    <div class="container header-inner">
+        <div class="row">
+            <div class="col-xs-2 col-lg-2">
+                <div class="clearfix relative">
+                    <a class="pull-left" href="/boecker">
+                        <img src="/img/edeka_logo_2.png" alt="edeka_logo" title="edeka" class="img-responsive logo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-lg-6">
+            	<ul class="list-unstyled list-inline list-market"> 
+	<li visible-md visible-lg>
+		<img class="img-market" alt="storeLogo" src="/images/logo_small_boecker.jpg" width="95" height="30">
+	</li>
+	<li class="your-market">
+		<p class="chosen">
+			Ihr Markt:
+			  <span class="colored-ci">EDEKA Böcker,
+				Überseeboulevard  4-10,  20457  Hamburg</span>
+		</p>
+		<ul class="list-unstyled list-inline" ng-controller="DeliveryRegionForceOpenModalController">
+			<li ng-controller="deliveryRegionController"><a ng-click="showDeliveryRegionModal()" href="javascript:;"> <span class="icon icon-arrow-right"></span> Unser Liefergebiet</a></li>
+			<li><form action="/boecker/_hn:action%7Cr9_r1_r3_r4%7C/products?query=3090291386041&amp;r9_r1_r3_r4:action=SHOP_SELECTION" method="post" id="resetStore">
+					<a href="javascript:;" onclick="document.getElementById('resetStore').submit();"> <i class="icon icon-arrow-right"></i> Zur Marktauswahl</a>
+				</form></li>
+		</ul>
+	</li>
+</ul><form ng-controller="productSearchController" class="form-horizontal" role="form" action="/boecker/products" method="get">
+    <div class="form-group form-group-lg form-search">
+        <div edeka-click-outside="hide()" class="col-xs-12">
+            <div class="input-group input-group-lg">
+                <input ng-model="searchQuery" ng-change="suggest()" ng-init="searchQuery = '3090291386041'" ng-model-options="{ debounce: 200 }" id="productsearch" class="form-control input-lg" type="search" name="query" placeholder="Suchbegriff oder Artikelnamen eingeben" value="3090291386041" autocomplete="off">
+            	<span class="input-group-btn">
+		        	<button type="submit" class="btn btn-primary">
+		        		<span class="icon icon-loupe"></span>
+	        		</button>
+	    		</span>
+            </div>
+
+            <div ng-show="searchResult" class="search-suggestions">
+                <div class="cats">
+                    <div>
+                        <span class="header">Suchvorschläge</span>
+                        <ul class="navigation-4level">
+                            <li ng-repeat="suggestion in searchResult.suggestions">
+                                <a href="%7B%7Bsuggestion.href%7D%7D">
+                                    <span class="match">
+                                        <span ng-bind="suggestion.label"></span>
+                                    </span>
+                                    <span ng-show="suggestion.count">
+                                        (<span ng-bind="suggestion.count">0</span>)
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="header">Kategorien</span>
+                        <ul class="navigation-4level">
+                            <li ng-repeat="category in searchResult.categories">
+                                <a href="%7B%7Bcategory.href%7D%7D">
+                                    <span ng-bind="category.label"></span>
+                                    <span ng-show="category.count">
+                                        (<span ng-bind="category.count">0</span>)
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="header">Marke</span>
+                        <ul class="navigation-4level">
+                            <li ng-repeat="shopMarke in searchResult.shopMarken">
+                                <a href="%7B%7BshopMarke.href%7D%7D">
+                                    <span ng-bind="shopMarke.label"></span>
+                                    <span ng-show="shopMarke.count">
+                                        (<span ng-bind="shopMarke.count">0</span>)
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="suggestions">
+                    <a ng-click="hide()" href="javascript:;" class="iconlink-close pull-right">Schließen</a>
+                    <span class="header">Produktvorschläge</span>
+                    <ul class="search-list row">
+                        <li ng-repeat="product in searchResult.products" edeka-product-teaser product="product" gewichtsartikel-already-in-basket-modal-key='"gewichtsartikelAlreadyInBasketModalForSearchLayer" + product.productId' class="row product-list-item" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel,'mark-as-special-offer' : product.markAsSpecialOffer}">
+                            	                            
+                            <div edeka-modal="gewichtsartikelAlreadyInBasketModalForSearchLayer{{product.productId}}" unregister-old="true" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+								<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+							
+                        	 <div class="product-flag-holder">
+                           		<div ng-show="product.markAsSpecialOffer" class="product-flag flag-offer" ng-controller="productOfferController" ng-init="calculateOfferPercentage(product.specialOfferPriceIncTax,product.priceIncTax,'short')">
+                           			 	<span ng-if="isMoreThanTenPercentageDiscount(product.specialOfferPriceIncTax,product.priceIncTax)">
+	                                    	-{{calculateDiscountPercentage(product.specialOfferPriceIncTax,product.priceIncTax)}}%
+	                                    </span>
+	                                    <span ng-if="!isMoreThanTenPercentageDiscount(product.specialOfferPriceIncTax,product.priceIncTax)">
+	                                    	%
+	                                    </span>
+                           		</div>
+                           		<div ng-hide="!product.bio" class="product-flag flag-bio">Bio</div>  
+                            </div>
+                            <a href="%7B%7Bproduct.href%7D%7D" class="col-xs-2 product">
+                                <div class="img-holder">
+                                    <img ng-src="{{product.imagePath | productImageUrl: 'image84x84'}}" width="84px" height="84px" alt="{{product.productName}}">
+                                </div>
+                            </a>
+                            <div class="col-xs-5 product-data">
+                                <div>
+                                    <div class="description">
+                                        <a href="%7B%7Bproduct.href%7D%7D" class="product-title">
+                                            <strong>
+                                                <span ng-bind="product.productName"></span>
+                                            </strong>
+                                            <span ng-bind="product.packagingContent"></span>
+                                        </a>
+                                        <div class="product-data">
+                                            <div class="base-price" ng-show="product.grundpreisIncTax">
+                                                Grundpreis:
+                                                <span ng-bind="product.specialOfferGrundpreisIncTax ? product.specialOfferGrundpreisIncTax : product.grundpreisIncTax">
+                                                    0,00 €</span>/<span ng-bind="product.measureUnit">Stück</span>
+                                            </div>
+                                            <div ng-show="product.shopGewichtsartikel &amp;&amp; !product.extendedGewichtsartikel &amp;&amp; product.standardStueckgewicht &gt; 0" class="base-price">
+	           			  						<span>1 Stück ca. {{product.standardStueckgewicht}}</span>
+											</div>
+											
+											<div ng-show="product.shopGewichtsartikel" class="product-weight-flag"></div>		
+                                        </div>
+<!--                                         <div class="product-actions"> -->
+<!--                                             <a href="#" class="iconlink-arrow-right">Merken</a> -->
+<!--                                         </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 search-list-action">
+	                            <div class="col-xs-9 qty" ng-class="{'mark-as-special-offer' : product.markAsSpecialOffer}">
+									
+	                                <div ng-show="product.markAsSpecialOffer" class="right hint">
+	                                    vorher <span ng-bind="priceIncTax"></span>
+	                                </div>
+	
+									<div ng-show="product.extendedGewichtsartikel">
+										<div class="dropdown dropdown-stretch">
+	<button data-toggle="dropdown" type="button" class="btn btn-default btn-xs dropdown-toggle dropdown-productform">
+		<em class="icon icon-arrow-down"></em>
+		{{selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}}
+	</button>
+	<ul class="dropdown-menu">
+		<li ng-repeat="produktform in product.availableGewichtsartikelProduktformen track by $index">
+			<a tabindex="-1" ng-click="selectProduktform(produktform)">{{produktform | messages:'gewichtsartikelProduktform'}}</a>
+		</li>
+   </ul>
+</div>
+<div class="stepper weight-stepper">
+	<div class="form-group">
+		<div class="input-group input-group-sm">
+			<button ng-click="decreaseStueckgewicht()" ng-class="{disabled: !isDecreaseStueckgewichtAllowed()}" class="btn btn-input btn-sm" type="button">
+				<span class="glyphicons glyphicon-minus"></span>
+			</button><input ng-model="stueckgewicht" append-gram-to-inputvalue ng-blur="onStueckgewichtChange()" class="form-control input-sm amount" type="text" value="1"><button ng-click="increaseStueckgewicht()" ng-class="{disabled: !isIncreaseStueckgewichtAllowed()}" class="btn btn-input btn-sm" type="button"><span class="glyphicons glyphicon-plus"></span></button>
+		</div>
+	</div>
+</div></div>
+	
+	                                <div class="stepper">
+	                                    <div class="form-group">
+	                                        <div class="input-group input-group-sm">
+	                                            <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+	                                                <span class="glyphicons glyphicon-minus"></span>
+	                                            </button><input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1"><button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button"><span class="glyphicons glyphicon-plus"></span></button>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="col-xs-3 full-price right">
+	                            	<div class="price-holder">
+	                                    <div class="price">
+	                                        <span ng-bind="priceToShow | pricePreCommaPlaces">
+	                                        </span><span class="cents"><span ng-bind="priceToShow | priceDecimalPlaces"></span></span>
+	                                    </div>
+		                                <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+		                                    <span class="icon-cart"></span>
+	                                	</button>	                                
+	                                </div>
+
+	                            </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="pull-right">
+                        <a href="%7B%7BsearchResult.href%7D%7D" class="btn btn-primary btn-xs">
+                            Alle <span ng-bind="searchResult.totalHitsCount">0</span> Suchtreffer anzeigen
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+</div>
+            <div class="col-xs-4 col-lg-4">
+                <ul class="list-inline list-meta">
+                    <li>
+                        </li><li><a href="/boecker/contact-form">Kontakt</a></li>
+                        <span class="sep-group">|</span>
+                    
+					<li>
+		<a href="/boecker/login">Anmelden</a>
+        <span class="sep-group">|</span>
+	</li>
+	<li>
+		<a href="/boecker/register">Registrieren</a>
+	</li>
+</ul>
+                <div class="clearfix"></div>
+                <div ng-controller="basketController">
+                    <!-- mini-cart desktop -->
+                    <div class="mini-cart visible-md visible-lg">
+                        <ul class="list-unstyled list-inline list-buttons" ng-controller="deliveryWindowButtonController">
+                            <li class="pull-left" ng-class="{shoppingList: deliveryWindowInfo.selectedDeliveryWindow != nul}">
+                            	<a class="btn btn-primary btn-lg" href="/boecker/my-account/shopping-list">
+                                    <em class="icon icon-edit"></em>
+                                    <span ng-hide="deliveryWindowInfo.selectedDeliveryWindow != null">
+                                        Mein<br>Einkaufszettel</span>
+                                </a>
+                            </li>
+                            <li class="pull-right" ng-class="{deliveryWindow: deliveryWindowInfo.selectedDeliveryWindow != nul}">
+                                <a class="btn btn-primary btn-lg" ng-controller="deliveryWindowOpenViewController" ng-click="openDeliveryWindowView()" href="javascript:;">
+                                    <em class="icon icon-clock"></em>
+                                    <span ng-if="deliveryWindowInfo.shipmentSelected">
+                                   	    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'SHIPMENT'">
+                                        	Liefertermin<br>
+	                                   		<span class="selectedDeliveryWindow">
+	                                        {{deliveryWindowInfo.selectedDeliveryWindow.windowFrom  | date: "dd.MM., HH:mm"}}-{{deliveryWindowInfo.selectedDeliveryWindow.windowTo  | date: "HH:mm"}}
+	                                    	</span>
+	                                    </div>
+	                                    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow == null &amp;&amp; deliveryWindowInfo.shipmentSelected">
+	                                    	Liefertermin<br>
+	                                        sichern</div>
+	                                   <div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.shipmentSelected &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'PICKUP'">
+	                                    	Liefertermin<br>
+	                                        sichern</div>
+                                    </span>
+                                    <span ng-if="deliveryWindowInfo.pickupSelected">
+                                    	<div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'PICKUP'">
+                                        	Abholtermin<br>
+                                        	<span class="selectedDeliveryWindow">
+	                                        {{deliveryWindowInfo.selectedDeliveryWindow.windowFrom  | date: "dd.MM., HH:mm"}}-{{deliveryWindowInfo.selectedDeliveryWindow.windowTo  | date: "HH:mm"}}
+	                                    	</span>
+	                                    </div>
+	                                    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow == null &amp;&amp; deliveryWindowInfo.pickupSelected">
+	                                    	Abholtermin<br>
+	                                   		sichern</div>
+	                                    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.pickupSelected &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'SHIPMENT'">
+	                                    	Abholtermin<br>
+	                                   		sichern</div>
+                                    </span>
+                                    <span ng-if="deliveryWindowInfo.emmasboxSelected">
+                                    	<div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'EMMASBOX_PICKUP'">
+                                        	Abholstation Termin<br>
+                                        	<span class="selectedDeliveryWindow">
+                                                {{deliveryWindowInfo.selectedDeliveryWindow.windowFrom  | date: "dd.MM., HH:mm"}}-{{deliveryWindowInfo.selectedDeliveryWindow.windowTo  | date: "HH:mm"}}
+	                                    	</span>
+	                                    </div>
+	                                    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow == null &amp;&amp; deliveryWindowInfo.emmasboxSelected">
+	                                    	Abholstation<br>
+	                                   		sichern</div>
+	                                    <div ng-if="deliveryWindowInfo.selectedDeliveryWindow != null &amp;&amp; deliveryWindowInfo.emmasboxSelected &amp;&amp; deliveryWindowInfo.selectedDeliveryWindow.type == 'SHIPMENT'">
+	                                    	Abholstation<br>
+	                                   		sichern</div>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled list-inline list-cart-summary" width="400px">
+                        	<li class="sum" data-cart-layer="cart-layer">
+                        		<a href="/boecker/cart">
+                            		<em class="icon icon-cart"></em>
+                            		<strong>Warenkorb</strong>
+                            	 	<span ng-bind="basket.totalBasketItemCount">0</span> |
+                                	<span ng-bind="basket.grandTotal.totalIncludingTax">
+                                    	0,00 €</span>
+                          		</a>
+                    		</li>
+                            <li class="pull-right">     
+                                <a ng-show="basket.totalBasketItemCount === 0" ng-click="isBasketEmpty($event, 'emptyBasketPopup')" href="/boecker/checkout-emmasbox-pickup" class="btn btn-primary btn-to-checkout" type="button" edeka-popover="emptyBasketPopup" popover-duration="3000" data-content="Bitte legen Sie zuerst ein Produkt in den Warenkorb." data-placement="top">
+			Zur Kasse</a>
+
+<a ng-show="basket.totalBasketItemCount &gt; 0" ng-click="isCheckoutAllowed($event, 'headerMinimumOrderValuePopup')" href="/boecker/checkout-emmasbox-pickup" class="btn btn-primary btn-to-checkout" type="button" edeka-popover="headerMinimumOrderValuePopup" popover-duration="3000" data-content="Ihnen fehlen noch {{basket.diffToMinimumOrderValue}}, um den Mindest­bestellwert von {{basket.minimumOrderValue}} erreicht zu haben." data-placement="top">
+		    Zur Kasse</a>
+	</li>
+                        </ul>
+                    </div>
+                    <!-- mini-cart mobile -->
+                    <div class="visible-xs visible-sm">
+                        <ul class="list-unstyled list-inline list-minicart clearfix">
+                            <li><a class="btn btn-primary btn-lg"><em class="icon icon-edit"></em></a></li>
+                            <li class="pull-right" ng-controller="deliveryWindowOpenViewController">
+                                <a class="btn btn-primary btn-lg" ng-click="openDeliveryWindowView()" href="javascript:;">
+                                    <em class="icon icon-clock"></em>
+                                </a>
+                            </li>
+                            <li class="cart-summary" data-cart-layer="cart-layer">
+                                <a href="/boecker/cart">
+                                <em class="icon icon-cart"></em>
+                                <span>
+                                    <span ng-bind="basket.totalBasketItemCount">0</span> Artikel<br>
+                                    <span ng-bind="basket.grandTotal.totalIncludingTax">
+                                        0,00 €</span>
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="basketController" id="cart-layer" data-products="6">
+
+    <div id="cart-layer-container">
+
+        <h2>Ihr Warenkorb: <span ng-bind="basket.totalBasketItemCount">0</span> Artikel</h2>
+
+        <ul class="cart-layer-list">
+        	<li ng-repeat="basketItem in basket.basketECommerceCategoryJson | flattenProductItems track by basketItem.id" ng-controller="basketItemController" class="product-list-item" ng-class="{'weight-product': {{basketItem.extendedGewichtsartikel}}, 'weight-product-special-price': {{basketItem.markAsSpecialOffer}} }">
+				<div class="product-flag-holder">
+					<div ng-show="basketItem.markAsSpecialOffer" class="product-flag flag-offer" ng-controller="productOfferController">
+						<span ng-if="isMoreThanTenPercentageDiscount(basketItem.specialOfferPriceIncTax,basketItem.priceIncTax)">
+                          	-{{calculateDiscountPercentage(basketItem.specialOfferPriceIncTax,basketItem.priceIncTax)}}%
+	                    </span>
+	                    <span ng-if="!isMoreThanTenPercentageDiscount(basketItem.specialOfferPriceIncTax,basketItem.priceIncTax)">
+	                       	%
+	                    </span>
+					</div>
+				</div>
+				<a href="%7B%7BbasketItem.href%7D%7D" class="product-col product">
+					<div class="img-holder">
+						<img ng-if="basketItem.imagePath" ng-src="{{basketItem.imagePath | productImageUrl: 'image84x84'}}" alt="{{basketItem.productName}}">
+                        <img ng-if="!basketItem.imagePath" src="/img/product_placeholder_84x84.png" alt="{{basketItem.productName}}">
+					</div>
+				</a>
+				<div class="product-col product-data">
+					<div>
+						<div class="description">
+							<a href="%7B%7BbasketItem.href%7D%7D" class="product-title">
+	                            <strong>
+	                                <div ng-bind="basketItem.productName" class="product-name"></div>
+	                            </strong>
+							</a>
+							<div class="product-col product-data">
+								<div class="base-price" ng-hide="!basketItem.grundpreisIncTax">
+									Grundpreis:<span ng-bind="basketItem.specialOfferGrundpreisIncTax ? basketItem.specialOfferGrundpreisIncTax : basketItem.grundpreisIncTax"></span>/<span ng-bind="basketItem.measureUnit"></span>
+								</div>
+							</div>
+							<div class="product-actions">
+								<a ng-click="removeFromBasket()" href="javascript:;" class="iconlink-close">
+	                                entfernen</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="product-col full-price right">
+                   <div class="dropdown dropdown-stretch" ng-if="basketItem.extendedGewichtsartikel">
+					   <button data-toggle="dropdown" type="button" class="btn btn-default btn-xs dropdown-toggle dropdown-productform">
+                           <em class="icon icon-arrow-down"></em>
+						   {{basketItem.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}}
+                       </button>
+					   <ul class="dropdown-menu">
+						   <li ng-repeat="produktform in basketItem.availableGewichtsartikelProduktformen track by $index">
+							   <a href="#" tabindex="-1" ng-click="selectProduktform(produktform)">{{produktform | messages:'gewichtsartikelProduktform'}}</a>
+						   </li>
+					   </ul>
+                   </div>
+                   <div class="stepper" ng-if="basketItem.extendedGewichtsartikel">
+					   <div class="input-group input-group-sm">
+						   <button ng-click="decreaseWeight()" class="btn btn-input btn-sm" type="button">
+							   <span class="glyphicons glyphicon-minus"></span>
+						   </button>
+						   <input class="form-control input-sm amount" append-gram-to-inputvalue type="text" ng-model="basketItem.stueckgewicht" ng-blur="onWeightChange()" value=""><button ng-click="increaseWeight()" class="btn btn-input btn-sm" type="button"><span class="glyphicons glyphicon-plus"></span>
+						   </button>
+					   </div>
+             		</div>
+						<div class="product-weight-flag pull-left" ng-if="basketItem.gewichtsartikel"></div>
+             			<edeka-basket-item-price-holder basket-item="basketItem"></edeka-basket-item-price-holder>
+					
+					<div class="stepper">
+                        <div class="form-group pull-right">
+                            <div class="input-group input-group-sm">
+                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                    <em class="glyphicons glyphicon-minus"></em>
+                                </button>
+                                <input ng-model="basketItem.quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                    <em class="glyphicons glyphicon-plus"></em>
+                                </button>
+                            </div>
+                        </div>
+					</div>
+				</div>
+			</li>
+        </ul>
+
+		<div class="cart-footer" ng-class="{'cart-footer-large' : basket.grandTotal.hasKistenzuschlag }">
+			<div class="col-xs-5 shipping-offer">
+				<edeka-delivery-window-chart delivery-window="basket.deliveryWindow" ng-if="basket.deliveryWindow"></edeka-delivery-window-chart>
+
+				<div class="payment-options" ng-controller="allowedPaymentMethodsController" ng-init="getAllowedPaymentMethods()">
+                	<span ng-repeat="paymentMethod in allowedPaymentMethods">
+	                	<div ng-if="paymentMethod.name == 'CREDIT_CARD'">
+	                		<img alt="mastercardicon" src="/images/np/icons/icn_mastercard_tx.png" class="">
+	                	</div>
+	                	<div ng-if="paymentMethod.name == 'CASH'">
+							<img alt="cashicon" src="/images/np/icons/icn_barzahlung_tx.png" class="">
+	                	</div>
+	                	<div ng-if="paymentMethod.name == 'CREDIT_CARD'">
+	                		<img alt="visaicon" src="/images/np/icons/icn_visa_tx.png" class="">
+	                	</div>
+	                	<div ng-if="paymentMethod.name == 'ELECTRONIC_CASH'">
+	                		<img alt="electroniccashicon" src="/images/np/icons/icn_eccard_tx.png" class="">
+	                	</div>
+	                	<div ng-if="paymentMethod.name == 'INVOICE'">
+	                		<img alt="invoiceicon" src="/images/np/icons/icn_rechnung_tx.png" class="">
+	                	</div>
+                	</span>
+                </div>
+			</div>
+			<div class="col-xs-4 col-xs-offset-1">
+				<ul class="price-to-pay">
+					<li>
+						<span>
+                            <strong>Insgesamt <span ng-bind="basket.totalBasketItemCount">0</span> Artikel:</strong>
+                        </span>
+						<span class="pull-right">
+                            <strong><span ng-bind="basket.grandTotal.productsTotalExcludingTax"></span></strong>
+                        </span>
+					</li>
+                    <li ng-show="basket.totalBasketItemCount">
+                    	<span>
+                        	ermäßigte MwSt.:</span>
+                    	<span class="pull-right">
+	                        <span ng-bind="basket.grandTotal.productsTotalReducedTax"></span>
+    	                </span>
+                    </li>
+					<li ng-show="basket.totalBasketItemCount">
+                    	<span>
+                        	reguläre MwSt.:</span>
+                    	<span class="pull-right">
+	                        <span ng-bind="basket.grandTotal.productsTotalNormalTax"></span>
+    	                </span>
+                	</li>
+                    <li ng-show="basket.totalBasketItemCount">
+                    	<span>
+                        	Pfand inkl. MwSt.:</span>
+                    	<span class="pull-right">
+	                        <span ng-bind="basket.grandTotal.depositTotalIncludingTax"></span>
+    	                </span>
+                    </li>
+                    <li ng-show="basket.totalBasketItemCount &amp;&amp; basket.grandTotal.hasKistenzuschlag">
+                    	<span>
+                        	Kistenzuschlag: <a href="/boecker/faq"><img alt="Info" src="/images/np/icons/edeka_icon_kistenzuschlag.png"></a>
+                    	</span>
+                    	<span class="pull-right">
+	                        <span ng-bind="basket.grandTotal.kistenzuschlagCostsTotalIncludingTax"></span>
+    	                </span>
+                    </li>
+                    <li ng-show="basket.deliveryWindow">
+ 						<span ng-show="basket.deliveryWindow.type == 'SHIPMENT'">Liefergebühr inkl. MwSt.:</span>
+						<span ng-show="basket.deliveryWindow.type != 'SHIPMENT'">Abholgebühr inkl. MwSt.:</span>
+                    	<span class="pull-right">
+	                        <span ng-bind="basket.grandTotal.deliveryCostsTotalIncludingTax"></span>
+    	                </span>
+                    </li>
+                    <li ng-hide="basket.deliveryWindow || basket.totalBasketItemCount === 0" ng-controller="deliveryWindowOpenViewController">
+                            <a ng-click="openDeliveryWindowView()" href="javascript:;">
+                               zzgl. Liefer-/ Abholgebühr</a>
+                    </li>
+					<li>
+                        <span class="h2">Summe:</span>
+                        <span class="price-holder pull-right">
+							<div class="price">
+	                            <span ng-bind="basket.grandTotal.totalIncludingTax | pricePreCommaPlaces"></span><span class="cents"><span ng-bind="basket.grandTotal.totalIncludingTax | priceDecimalPlaces"></span></span>
+	                        </div>
+                        </span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-1 col-xs-2">
+				<a ng-show="basket.totalBasketItemCount === 0" ng-click="isBasketEmpty($event, 'layerEmptyBasketPopup')" href="/boecker/checkout-emmasbox-pickup" class="btn btn-primary btn-sm button-bottom btn-to-checkout" type="button" edeka-popover="layerEmptyBasketPopup" popover-duration="3000" data-content="Bitte legen Sie zuerst ein Produkt in den Warenkorb." data-placement="top">
+			Zur Kasse</a>
+
+<a ng-show="basket.totalBasketItemCount &gt; 0" ng-click="isCheckoutAllowed($event, 'layerMinimumOrderValuePopup')" href="/boecker/checkout-emmasbox-pickup" class="btn btn-primary btn-sm button-bottom btn-to-checkout" type="button" edeka-popover="layerMinimumOrderValuePopup" popover-duration="3000" data-content="Ihnen fehlen noch {{basket.diffToMinimumOrderValue}}, um den Mindest­bestellwert von {{basket.minimumOrderValue}} erreicht zu haben." data-placement="top" role="button">
+		    Zur Kasse</a>
+	</div>
+		</div>
+
+    </div>
+
+</div>
+<div class="modal fade" edeka-modal="shoppingListModal" id="modal-shopping-list" role="dialog" ng-controller="productShoppingListDialogController">
+    <div class="modal-dialog modal-max">
+        <div class="modal-content">
+			<div class="modal-header clearfix">
+          		<a class="iconlink-close pull-right" href="javascript:;" data-dismiss="modal"></a>
+            	<h3>Einkaufszettel wählen</h3>
+            	<p>Bitte wählen Sie einen der Einkaufszettel aus oder legen Sie einen neuen an.</p>
+            </div>
+			<div class="row">
+
+				<div class="list-group">
+				  <a ng-repeat="shoppingList in shoppingLists track by $index" ng-click="addShoppingListItem(shoppingList, 'addedToShoppingListPopover')" href="javascript:;" class="list-group-item">
+				  		<span ng-bind="shoppingList.name"></span>
+				  </a>		
+				</div>
+				
+				<div class="form-group">
+					<div class="input-group input-group-xs">
+						<input ng-model="shoppingListName" type="text" placeholder="Neuer Einkaufszettel" class="form-control input-xs"> <span ng-click="addShoppingListItemToNewShoppingList()" class="input-group-addon input-group-addon-btn"> 
+							<em class="icon icon-plus"></em>
+						</span>
+					</div>
+				</div>
+				
+				
+			</div>	
+        </div>
+    </div>
+</div>
+
+
+<div id="navigation">
+    <nav class="navbar" role="navigation">
+        <!-- Nav 1st Level -->
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <ul class="navbar-main list-unstyled list-inline">
+                    <li class="active">
+                   		<a href="/boecker/products">
+                            Online einkaufen
+                            <span class="caret"></span>
+                        </a>
+                        <span class="sep">|</span>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://www.hafencityfrisch.de">Über uns</a>
+                        <span class="sep">|</span>
+                    </li>
+                     <li ng-controller="deliveryRegionController">
+                         <a ng-click="showDeliveryRegionModal()" href="javascript:;">
+                            Unser Liefergebiet</a>
+                     </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Nav 2nd Level -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="nav navbar-sub">
+                    <ul class="list-unstyled clearfix navigation-2level">
+						<li>
+								<a href="/boecker/products?themenweltFilter=GUT%26G%C3%9CNSTIG&amp;themenweltFilter=BIO&amp;themenweltFilter=Italien&amp;themenweltFilter=Backen+mit+Liebe&amp;themenweltFilter=Osterzeit">Themenwelten</a>
+								<ul class="navigation-sub navigation-3level nav-col-1">
+									<li class="navigation-3level">
+										<h4>Themenwelten</h4>
+                                   		<ul class="navigation-4level">
+                                    		<li>
+                                                		<a href="/boecker/products?themenweltFilter=GUT%26G%C3%9CNSTIG"><span class="icon icon-arrow-right"></span>GUT&amp;GÜNSTIG</a>
+                                                	</li>
+                                            	<li>
+                                                		<a href="/boecker/products?themenweltFilter=BIO"><span class="icon icon-arrow-right"></span>BIO</a>
+                                                	</li>
+                                            	<li>
+                                                		<a href="/boecker/products?themenweltFilter=Italien"><span class="icon icon-arrow-right"></span>Italien</a>
+                                                	</li>
+                                            	<li>
+                                                		<a href="/boecker/products?themenweltFilter=Backen+mit+Liebe"><span class="icon icon-arrow-right"></span>Backen mit Liebe</a>
+                                                	</li>
+                                            	<li>
+                                                		<a href="/boecker/products?themenweltFilter=Osterzeit"><span class="icon icon-arrow-right"></span>Osterzeit</a>
+                                                	</li>
+                                            	</ul>
+                                    </li>
+                                </ul>
+                            </li>
+                    	<li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse">Obst &amp; Gemüse</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst">Obst</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1%C3%84pfel"><span class="icon icon-arrow-right"></span>Äpfel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1Bananen"><span class="icon icon-arrow-right"></span>Bananen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1Beeren+%26+Trauben"><span class="icon icon-arrow-right"></span>Beeren &amp; Trauben</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1Birnen"><span class="icon icon-arrow-right"></span>Birnen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1Steinobst"><span class="icon icon-arrow-right"></span>Steinobst</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst%E2%9E%A1S%C3%BCdfr%C3%BCchte"><span class="icon icon-arrow-right"></span>Südfrüchte</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse">Gemüse</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Auberginen"><span class="icon icon-arrow-right"></span>Auberginen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Exotisches+Gem%C3%BCse"><span class="icon icon-arrow-right"></span>Exotisches Gemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Gurken"><span class="icon icon-arrow-right"></span>Gurken</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Kartoffeln"><span class="icon icon-arrow-right"></span>Kartoffeln</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Kohl"><span class="icon icon-arrow-right"></span>Kohl</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Kr%C3%A4uter+%26+Gew%C3%BCrze"><span class="icon icon-arrow-right"></span>Kräuter &amp; Gewürze</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Paprika+%26+Peperoni"><span class="icon icon-arrow-right"></span>Paprika &amp; Peperoni</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Pilze"><span class="icon icon-arrow-right"></span>Pilze</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Salate"><span class="icon icon-arrow-right"></span>Salate</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Spargel+%26+St%C3%A4ngelgem%C3%BCse"><span class="icon icon-arrow-right"></span>Spargel &amp; Stängelgemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Tomaten"><span class="icon icon-arrow-right"></span>Tomaten</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Weiteres+Fruchtgem%C3%BCse"><span class="icon icon-arrow-right"></span>Weiteres Fruchtgemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Wurzelgem%C3%BCse"><span class="icon icon-arrow-right"></span>Wurzelgemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse%E2%9E%A1Zwiebeln"><span class="icon icon-arrow-right"></span>Zwiebeln</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Trockenfr%C3%BCchte%2C+N%C3%BCsse+%26+Kerne">Trockenfrüchte, Nüsse &amp; Kerne</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Trockenfr%C3%BCchte%2C+N%C3%BCsse+%26+Kerne%E2%9E%A1N%C3%BCsse"><span class="icon icon-arrow-right"></span>Nüsse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Trockenfr%C3%BCchte%2C+N%C3%BCsse+%26+Kerne%E2%9E%A1Schalenobst"><span class="icon icon-arrow-right"></span>Schalenobst</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Trockenfr%C3%BCchte%2C+N%C3%BCsse+%26+Kerne%E2%9E%A1Trockenobst"><span class="icon icon-arrow-right"></span>Trockenobst</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Vorgepackte+Ware">Vorgepackte Ware</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Vorgepackte+Ware%E2%9E%A1Gem%C3%BCse"><span class="icon icon-arrow-right"></span>Gemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Vorgepackte+Ware%E2%9E%A1Mischpackungen"><span class="icon icon-arrow-right"></span>Mischpackungen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Vorgepackte+Ware%E2%9E%A1Obst"><span class="icon icon-arrow-right"></span>Obst</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke">Frischetheke</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch">Fleisch</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Fleischzubereitungen"><span class="icon icon-arrow-right"></span>Fleischzubereitungen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Gefl%C3%BCgel"><span class="icon icon-arrow-right"></span>Geflügel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Kalb"><span class="icon icon-arrow-right"></span>Kalb</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Kassler%2C+Rippchen+%26+Weiteres"><span class="icon icon-arrow-right"></span>Kassler, Rippchen &amp; Weiteres</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Rind"><span class="icon icon-arrow-right"></span>Rind</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Schaf%2C+Lamm+%26+Ziege"><span class="icon icon-arrow-right"></span>Schaf, Lamm &amp; Ziege</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Schwein"><span class="icon icon-arrow-right"></span>Schwein</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Verzehrfertige+Produkte"><span class="icon icon-arrow-right"></span>Verzehrfertige Produkte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fleisch%E2%9E%A1Wild"><span class="icon icon-arrow-right"></span>Wild</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt">Wurst &amp; Aufschnitt</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt%E2%9E%A1Jagdwurst%2C+Mortadella+%26+Weiteres"><span class="icon icon-arrow-right"></span>Jagdwurst, Mortadella &amp; Weiteres</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt%E2%9E%A1Leberwurst%2C+S%C3%BClzen+%26+Weiteres"><span class="icon icon-arrow-right"></span>Leberwurst, Sülzen &amp; Weiteres</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt%E2%9E%A1Roh-+%26+Kochschinken"><span class="icon icon-arrow-right"></span>Roh- &amp; Kochschinken</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt%E2%9E%A1Salami%2C+Mettwurst+%26+Weiteres"><span class="icon icon-arrow-right"></span>Salami, Mettwurst &amp; Weiteres</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Wurst+%26+Aufschnitt%E2%9E%A1Weitere+Wurstwaren"><span class="icon icon-arrow-right"></span>Weitere Wurstwaren</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fisch">Fisch</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1Fisch%E2%9E%A1Sushi+und+Surimi"><span class="icon icon-arrow-right"></span>Sushi und Surimi</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se">Käse</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1Frischk%C3%A4se"><span class="icon icon-arrow-right"></span>Frischkäse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1Hart-+%26+Schnittk%C3%A4se"><span class="icon icon-arrow-right"></span>Hart- &amp; Schnittkäse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1K%C3%A4sezubereitungen"><span class="icon icon-arrow-right"></span>Käsezubereitungen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1Sauermilchk%C3%A4se"><span class="icon icon-arrow-right"></span>Sauermilchkäse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1Schmelzk%C3%A4se"><span class="icon icon-arrow-right"></span>Schmelzkäse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Frischetheke%E2%9E%A1K%C3%A4se%E2%9E%A1Weichk%C3%A4se"><span class="icon icon-arrow-right"></span>Weichkäse</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte">Kühlprodukte</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fleisch%2C+Wurst+%26+Fisch">Fleisch, Wurst &amp; Fisch</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fleisch%2C+Wurst+%26+Fisch%E2%9E%A1Fisch+%26+Meeresfr%C3%BCchte"><span class="icon icon-arrow-right"></span>Fisch &amp; Meeresfrüchte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fleisch%2C+Wurst+%26+Fisch%E2%9E%A1Fleisch+%26+W%C3%BCrste"><span class="icon icon-arrow-right"></span>Fleisch &amp; Würste</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fleisch%2C+Wurst+%26+Fisch%E2%9E%A1Salami+%26+Schinken"><span class="icon icon-arrow-right"></span>Salami &amp; Schinken</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fleisch%2C+Wurst+%26+Fisch%E2%9E%A1Weitere+Wurstwaren"><span class="icon icon-arrow-right"></span>Weitere Wurstwaren</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte">Eier, Käse &amp; Molkereiprodukte</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Butter%2C+Fette+%26+Margarine"><span class="icon icon-arrow-right"></span>Butter, Fette &amp; Margarine</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Eier"><span class="icon icon-arrow-right"></span>Eier</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1K%C3%A4se"><span class="icon icon-arrow-right"></span>Käse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Milch"><span class="icon icon-arrow-right"></span>Milch</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Milchmischgetr%C3%A4nke"><span class="icon icon-arrow-right"></span>Milchmischgetränke</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Quark+%26+Tzaziki"><span class="icon icon-arrow-right"></span>Quark &amp; Tzaziki</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Sahne+%26+Schmand"><span class="icon icon-arrow-right"></span>Sahne &amp; Schmand</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Eier%2C+K%C3%A4se+%26+Molkereiprodukte%E2%9E%A1Tofu+%26+weitere+Sojaprodukte"><span class="icon icon-arrow-right"></span>Tofu &amp; weitere Sojaprodukte</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte">Fertiggerichte</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Aufl%C3%A4ufe"><span class="icon icon-arrow-right"></span>Aufläufe</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Fleisch-+%26+Fischfertiggerichte"><span class="icon icon-arrow-right"></span>Fleisch- &amp; Fischfertiggerichte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Suppen+%26+Eint%C3%B6pfe"><span class="icon icon-arrow-right"></span>Suppen &amp; Eintöpfe</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Teig-+%26+Backwaren"><span class="icon icon-arrow-right"></span>Teig- &amp; Backwaren</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Vegetarische+Fertiggerichte"><span class="icon icon-arrow-right"></span>Vegetarische Fertiggerichte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Fertiggerichte%E2%9E%A1Weitere+Fertiggerichte"><span class="icon icon-arrow-right"></span>Weitere Fertiggerichte</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Joghurt%2C+Desserts+%26+Snacks">Joghurt, Desserts &amp; Snacks</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Joghurt%2C+Desserts+%26+Snacks%E2%9E%A1Dessert"><span class="icon icon-arrow-right"></span>Dessert</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Joghurt%2C+Desserts+%26+Snacks%E2%9E%A1Joghurt"><span class="icon icon-arrow-right"></span>Joghurt</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte%E2%9E%A1Joghurt%2C+Desserts+%26+Snacks%E2%9E%A1Riegel"><span class="icon icon-arrow-right"></span>Riegel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl">Tiefkühl</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fertiggerichte">Fertiggerichte</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fertiggerichte%E2%9E%A1Back-+%26+Teigwaren"><span class="icon icon-arrow-right"></span>Back- &amp; Teigwaren</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fertiggerichte%E2%9E%A1Kartoffelprodukte"><span class="icon icon-arrow-right"></span>Kartoffelprodukte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fertiggerichte%E2%9E%A1Pizza"><span class="icon icon-arrow-right"></span>Pizza</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fertiggerichte%E2%9E%A1Weitere+Fertiggerichte"><span class="icon icon-arrow-right"></span>Weitere Fertiggerichte</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fleisch+%26+Fisch">Fleisch &amp; Fisch</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fleisch+%26+Fisch%E2%9E%A1Fisch"><span class="icon icon-arrow-right"></span>Fisch</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fleisch+%26+Fisch%E2%9E%A1Fleisch+%26+Wild"><span class="icon icon-arrow-right"></span>Fleisch &amp; Wild</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Fleisch+%26+Fisch%E2%9E%A1Gefl%C3%BCgel"><span class="icon icon-arrow-right"></span>Geflügel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Obst+%26+Gem%C3%BCse">Obst &amp; Gemüse</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Gem%C3%BCse"><span class="icon icon-arrow-right"></span>Gemüse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Kr%C3%A4uter"><span class="icon icon-arrow-right"></span>Kräuter</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Obst+%26+Gem%C3%BCse%E2%9E%A1Obst"><span class="icon icon-arrow-right"></span>Obst</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Eis+%26+Desserts">Eis &amp; Desserts</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Eis+%26+Desserts%E2%9E%A1Desserts"><span class="icon icon-arrow-right"></span>Desserts</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tiefk%C3%BChl%E2%9E%A1Eis+%26+Desserts%E2%9E%A1Eis"><span class="icon icon-arrow-right"></span>Eis</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel">Nahrungsmittel</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres">Nudeln, Reis &amp; Weiteres</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Baby+%26+Kleinkind"><span class="icon icon-arrow-right"></span>Baby &amp; Kleinkind</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Fertiggerichte"><span class="icon icon-arrow-right"></span>Fertiggerichte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Fr%C3%BChst%C3%BCck"><span class="icon icon-arrow-right"></span>Frühstück</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1H%C3%BClsenfr%C3%BCchte"><span class="icon icon-arrow-right"></span>Hülsenfrüchte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Kartoffelerzeugnisse+%26+Kl%C3%B6%C3%9Fe"><span class="icon icon-arrow-right"></span>Kartoffelerzeugnisse &amp; Klöße</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Nudeln"><span class="icon icon-arrow-right"></span>Nudeln</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1Reis"><span class="icon icon-arrow-right"></span>Reis</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Nudeln%2C+Reis+%26+Weiteres%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Suppen"><span class="icon icon-arrow-right"></span>Soßen, Öle &amp; Suppen</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren">Brot- &amp; Backwaren</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Backzutaten"><span class="icon icon-arrow-right"></span>Backzutaten</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Brot+%26+Geb%C3%A4ck"><span class="icon icon-arrow-right"></span>Brot &amp; Gebäck</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Frisch+aus+dem+Ofen"><span class="icon icon-arrow-right"></span>Frisch aus dem Ofen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Mehl%2C+Grie%C3%9F+%26+St%C3%A4rke"><span class="icon icon-arrow-right"></span>Mehl, Grieß &amp; Stärke</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Pudding-+%26+Dessertpulver"><span class="icon icon-arrow-right"></span>Pudding- &amp; Dessertpulver</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Brot-+%26+Backwaren%E2%9E%A1Zucker%2C+Puderzucker+%26+S%C3%BC%C3%9Fstoffe"><span class="icon icon-arrow-right"></span>Zucker, Puderzucker &amp; Süßstoffe</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze">Soßen, Öle &amp; Gewürze</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1Essig"><span class="icon icon-arrow-right"></span>Essig</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1Ketchup+%26+W%C3%BCrzso%C3%9Fen"><span class="icon icon-arrow-right"></span>Ketchup &amp; Würzsoßen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1Mayonnaisen+%26+Remouladen"><span class="icon icon-arrow-right"></span>Mayonnaisen &amp; Remouladen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1%C3%96le"><span class="icon icon-arrow-right"></span>Öle</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1Salz%2C+Pfeffer+%26+Gew%C3%BCrze"><span class="icon icon-arrow-right"></span>Salz, Pfeffer &amp; Gewürze</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1Senf+%26+Meerrettich"><span class="icon icon-arrow-right"></span>Senf &amp; Meerrettich</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1So%C3%9Fen%2C+%C3%96le+%26+Gew%C3%BCrze%E2%9E%A1So%C3%9Fen+%26+Dressing"><span class="icon icon-arrow-right"></span>Soßen &amp; Dressing</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost">Konserven &amp; Feinkost</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Feinkost"><span class="icon icon-arrow-right"></span>Feinkost</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Fischkonserven"><span class="icon icon-arrow-right"></span>Fischkonserven</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Fleischkonserven"><span class="icon icon-arrow-right"></span>Fleischkonserven</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Gem%C3%BCsekonserven"><span class="icon icon-arrow-right"></span>Gemüsekonserven</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Obstkonserven"><span class="icon icon-arrow-right"></span>Obstkonserven</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Sauerkonserven"><span class="icon icon-arrow-right"></span>Sauerkonserven</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nahrungsmittel%E2%9E%A1Konserven+%26+Feinkost%E2%9E%A1Wurstkonserven"><span class="icon icon-arrow-right"></span>Wurstkonserven</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck">Süßwaren &amp; Gebäck</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Schokolade">Schokolade</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Schokolade%E2%9E%A1Formen+%26+Figuren"><span class="icon icon-arrow-right"></span>Formen &amp; Figuren</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Schokolade%E2%9E%A1Pralinen"><span class="icon icon-arrow-right"></span>Pralinen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Schokolade%E2%9E%A1Riegel"><span class="icon icon-arrow-right"></span>Riegel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Schokolade%E2%9E%A1Tafelschokolade"><span class="icon icon-arrow-right"></span>Tafelschokolade</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren">Süßwaren</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Bonbons+%26+Lollis"><span class="icon icon-arrow-right"></span>Bonbons &amp; Lollis</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Fruchtgummi"><span class="icon icon-arrow-right"></span>Fruchtgummi</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Kaugummi"><span class="icon icon-arrow-right"></span>Kaugummi</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Lakritze"><span class="icon icon-arrow-right"></span>Lakritze</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Schaumprodukte"><span class="icon icon-arrow-right"></span>Schaumprodukte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1%C3%9Cberzogene+Fr%C3%BCchte"><span class="icon icon-arrow-right"></span>Überzogene Früchte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1S%C3%BC%C3%9Fwaren%E2%9E%A1Weitere+S%C3%BC%C3%9Fwaren"><span class="icon icon-arrow-right"></span>Weitere Süßwaren</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel">Knabberartikel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Chips+%26+Tortillas"><span class="icon icon-arrow-right"></span>Chips &amp; Tortillas</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Flips"><span class="icon icon-arrow-right"></span>Flips</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Laugengeb%C3%A4ck"><span class="icon icon-arrow-right"></span>Laugengebäck</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Nuss-+%26+Mischpackungen"><span class="icon icon-arrow-right"></span>Nuss- &amp; Mischpackungen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Popcorn+%26+Puffreis"><span class="icon icon-arrow-right"></span>Popcorn &amp; Puffreis</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Knabberartikel%E2%9E%A1Weitere+Knabberartikel"><span class="icon icon-arrow-right"></span>Weitere Knabberartikel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck">Kuchen, Kekse &amp; süßes Gebäck</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Backmischpackungen"><span class="icon icon-arrow-right"></span>Backmischpackungen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Feingeb%C3%A4ck"><span class="icon icon-arrow-right"></span>Feingebäck</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Kekse"><span class="icon icon-arrow-right"></span>Kekse</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Kuchen"><span class="icon icon-arrow-right"></span>Kuchen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Waffeln"><span class="icon icon-arrow-right"></span>Waffeln</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1S%C3%BC%C3%9Fwaren+%26+Geb%C3%A4ck%E2%9E%A1Kuchen%2C+Kekse+%26+s%C3%BC%C3%9Fes+Geb%C3%A4ck%E2%9E%A1Weitere+Geb%C3%A4cke"><span class="icon icon-arrow-right"></span>Weitere Gebäcke</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke">Getränke</a>
+                                <ul class="navigation-sub navigation-3level nav-col-5">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke">Wasser &amp; Softgetränke</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Babys+%26+Kleinkinder"><span class="icon icon-arrow-right"></span>Babys &amp; Kleinkinder</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Eistee"><span class="icon icon-arrow-right"></span>Eistee</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Limonaden"><span class="icon icon-arrow-right"></span>Limonaden</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1S%C3%A4fte"><span class="icon icon-arrow-right"></span>Säfte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Sirup"><span class="icon icon-arrow-right"></span>Sirup</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Sportgetr%C3%A4nke"><span class="icon icon-arrow-right"></span>Sportgetränke</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wasser+%26+Softgetr%C3%A4nke%E2%9E%A1Wasser"><span class="icon icon-arrow-right"></span>Wasser</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Hei%C3%9F-+%26+Aufgussgetr%C3%A4nke">Heiß- &amp; Aufgussgetränke</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Hei%C3%9F-+%26+Aufgussgetr%C3%A4nke%E2%9E%A1Kaffee"><span class="icon icon-arrow-right"></span>Kaffee</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Hei%C3%9F-+%26+Aufgussgetr%C3%A4nke%E2%9E%A1Kakao"><span class="icon icon-arrow-right"></span>Kakao</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Hei%C3%9F-+%26+Aufgussgetr%C3%A4nke%E2%9E%A1Tee"><span class="icon icon-arrow-right"></span>Tee</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Bier">Bier</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Bier%E2%9E%A1Alkoholfreies+Bier"><span class="icon icon-arrow-right"></span>Alkoholfreies Bier</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Bier%E2%9E%A1Bier"><span class="icon icon-arrow-right"></span>Bier</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Bier%E2%9E%A1Biermischgetr%C3%A4nke"><span class="icon icon-arrow-right"></span>Biermischgetränke</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt">Wein &amp; Sekt</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Perlwein"><span class="icon icon-arrow-right"></span>Perlwein</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Ros%C3%A9wein"><span class="icon icon-arrow-right"></span>Roséwein</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Rotwein"><span class="icon icon-arrow-right"></span>Rotwein</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Sekt"><span class="icon icon-arrow-right"></span>Sekt</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Sekt+Ros%C3%A9"><span class="icon icon-arrow-right"></span>Sekt Rosé</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Wei%C3%9Fwein"><span class="icon icon-arrow-right"></span>Weißwein</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Wein+%26+Sekt%E2%9E%A1Weitere+Weine+%26+weinhaltige+Getr%C3%A4nke"><span class="icon icon-arrow-right"></span>Weitere Weine &amp; weinhaltige Getränke</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen">Spirituosen</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Aperitives"><span class="icon icon-arrow-right"></span>Aperitives</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Aquavit"><span class="icon icon-arrow-right"></span>Aquavit</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Korn"><span class="icon icon-arrow-right"></span>Korn</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Lik%C3%B6re"><span class="icon icon-arrow-right"></span>Liköre</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Mixspirituosen"><span class="icon icon-arrow-right"></span>Mixspirituosen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Obstbrand"><span class="icon icon-arrow-right"></span>Obstbrand</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Rum"><span class="icon icon-arrow-right"></span>Rum</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Tequila"><span class="icon icon-arrow-right"></span>Tequila</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Weinbrand"><span class="icon icon-arrow-right"></span>Weinbrand</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Weitere+Spirituosen"><span class="icon icon-arrow-right"></span>Weitere Spirituosen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Whisky"><span class="icon icon-arrow-right"></span>Whisky</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Getr%C3%A4nke%E2%9E%A1Spirituosen%E2%9E%A1Wodka"><span class="icon icon-arrow-right"></span>Wodka</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt">Haushalt</a>
+                                <ul class="navigation-sub navigation-3level nav-col-4">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel">Haushaltsartikel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Aufbewahrungsboxen+%26+Kleinbeh%C3%A4lter"><span class="icon icon-arrow-right"></span>Aufbewahrungsboxen &amp; Kleinbehälter</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Beh%C3%A4lter%2C+Wannen+%26+Eimer"><span class="icon icon-arrow-right"></span>Behälter, Wannen &amp; Eimer</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Freiverk%C3%A4ufliche+Arzneimittel+%26+Gesundheitsartikel"><span class="icon icon-arrow-right"></span>Freiverkäufliche Arzneimittel &amp; Gesundheitsartikel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Haushaltsfolien%2C+Verpackungen+%26+Filter"><span class="icon icon-arrow-right"></span>Haushaltsfolien, Verpackungen &amp; Filter</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Kerzen+%26+Feuerzeuge"><span class="icon icon-arrow-right"></span>Kerzen &amp; Feuerzeuge</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Reinigungsger%C3%A4te"><span class="icon icon-arrow-right"></span>Reinigungsgeräte</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Tragetaschen"><span class="icon icon-arrow-right"></span>Tragetaschen</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Haushaltsartikel%E2%9E%A1Weitere+Haushaltsartikel"><span class="icon icon-arrow-right"></span>Weitere Haushaltsartikel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1K%C3%BCchenutensilien">Küchenutensilien</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1K%C3%BCchenutensilien%E2%9E%A1Gl%C3%A4ser"><span class="icon icon-arrow-right"></span>Gläser</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1K%C3%BCchenutensilien%E2%9E%A1Koch-%2C+Brat-+%26+Backgeschirr"><span class="icon icon-arrow-right"></span>Koch-, Brat- &amp; Backgeschirr</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1K%C3%BCchenutensilien%E2%9E%A1K%C3%BCchenwerkzeuge"><span class="icon icon-arrow-right"></span>Küchenwerkzeuge</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1K%C3%BCchenutensilien%E2%9E%A1Schneidewaren+%26+Besteck"><span class="icon icon-arrow-right"></span>Schneidewaren &amp; Besteck</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel">Putz- &amp; Reinigungsmittel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel%E2%9E%A1Geschirrsp%C3%BClmaschinenreiniger"><span class="icon icon-arrow-right"></span>Geschirrspülmaschinenreiniger</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel%E2%9E%A1Haushaltsreiniger"><span class="icon icon-arrow-right"></span>Haushaltsreiniger</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel%E2%9E%A1Lufterfrischer"><span class="icon icon-arrow-right"></span>Lufterfrischer</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel%E2%9E%A1Schuh-+%26+Textilpflege"><span class="icon icon-arrow-right"></span>Schuh- &amp; Textilpflege</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Putz-+%26+Reinigungsmittel%E2%9E%A1Sp%C3%BClmittel"><span class="icon icon-arrow-right"></span>Spülmittel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Waschmittel">Waschmittel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Waschmittel%E2%9E%A1Spezialwaschmittel"><span class="icon icon-arrow-right"></span>Spezialwaschmittel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Waschmittel%E2%9E%A1Universalwaschmittel"><span class="icon icon-arrow-right"></span>Universalwaschmittel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Haushalt%E2%9E%A1Waschmittel%E2%9E%A1Waschzusatzmittel"><span class="icon icon-arrow-right"></span>Waschzusatzmittel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie">Drogerie</a>
+                                <ul class="navigation-sub navigation-3level nav-col-5">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege">Haut- &amp; Körperpflege</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Baby+%26+Kleinkinder"><span class="icon icon-arrow-right"></span>Baby &amp; Kleinkinder</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Dekorative+Kosmetik"><span class="icon icon-arrow-right"></span>Dekorative Kosmetik</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Deodorantien"><span class="icon icon-arrow-right"></span>Deodorantien</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Duschgel+%26+Badezus%C3%A4tze"><span class="icon icon-arrow-right"></span>Duschgel &amp; Badezusätze</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Gesichtspflege"><span class="icon icon-arrow-right"></span>Gesichtspflege</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1K%C3%B6rperpflege"><span class="icon icon-arrow-right"></span>Körperpflege</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Parf%C3%BCm"><span class="icon icon-arrow-right"></span>Parfüm</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Seife"><span class="icon icon-arrow-right"></span>Seife</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haut-+%26+K%C3%B6rperpflege%E2%9E%A1Sonnenschutz"><span class="icon icon-arrow-right"></span>Sonnenschutz</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haarpflege">Haarpflege</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haarpflege%E2%9E%A1Baby+%26+Kleinkinder"><span class="icon icon-arrow-right"></span>Baby &amp; Kleinkinder</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haarpflege%E2%9E%A1Haarstyling"><span class="icon icon-arrow-right"></span>Haarstyling</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haarpflege%E2%9E%A1Shampoo"><span class="icon icon-arrow-right"></span>Shampoo</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Haarpflege%E2%9E%A1Sp%C3%BClung"><span class="icon icon-arrow-right"></span>Spülung</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Zahn-+%26+Mundpflege">Zahn- &amp; Mundpflege</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Zahn-+%26+Mundpflege%E2%9E%A1Mundsp%C3%BClung+%26+Mundspray"><span class="icon icon-arrow-right"></span>Mundspülung &amp; Mundspray</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Zahn-+%26+Mundpflege%E2%9E%A1Weitere+Zahn-+%26+Mundpflegeartikel"><span class="icon icon-arrow-right"></span>Weitere Zahn- &amp; Mundpflegeartikel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Zahn-+%26+Mundpflege%E2%9E%A1Zahnb%C3%BCrste+%26+Zubeh%C3%B6r"><span class="icon icon-arrow-right"></span>Zahnbürste &amp; Zubehör</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Zahn-+%26+Mundpflege%E2%9E%A1Zahncreme+%26+-gel"><span class="icon icon-arrow-right"></span>Zahncreme &amp; -gel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel">Papier- &amp; Hygieneartikel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel%E2%9E%A1Baby+%26+Kleinkinder"><span class="icon icon-arrow-right"></span>Baby &amp; Kleinkinder</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel%E2%9E%A1Damenhygieneartikel"><span class="icon icon-arrow-right"></span>Damenhygieneartikel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel%E2%9E%A1Hygienepapiere"><span class="icon icon-arrow-right"></span>Hygienepapiere</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel%E2%9E%A1Watte+%26+Verbandsstoffe"><span class="icon icon-arrow-right"></span>Watte &amp; Verbandsstoffe</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Papier-+%26+Hygieneartikel%E2%9E%A1Weitere+Hygieneartikel"><span class="icon icon-arrow-right"></span>Weitere Hygieneartikel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Drogerie%E2%9E%A1Nahrungserg%C3%A4nzungsmittel">Nahrungsergänzungsmittel</a></h4>
+                                                <ul class="navigation-4level">
+                                                    </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten">Tabak &amp; Zigaretten</a>
+                                <ul class="navigation-sub navigation-3level nav-col-2">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten%E2%9E%A1Zigaretten">Zigaretten</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten%E2%9E%A1Zigaretten%E2%9E%A1Zigaretten+mit+Filter"><span class="icon icon-arrow-right"></span>Zigaretten mit Filter</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten%E2%9E%A1Raucherzubeh%C3%B6r">Raucherzubehör</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten%E2%9E%A1Raucherzubeh%C3%B6r%E2%9E%A1Papier"><span class="icon icon-arrow-right"></span>Papier</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Tabak+%26+Zigaretten%E2%9E%A1Raucherzubeh%C3%B6r%E2%9E%A1Weitere+Bedarfsartikel"><span class="icon icon-arrow-right"></span>Weitere Bedarfsartikel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood">Nonfood</a>
+                                <ul class="navigation-sub navigation-3level nav-col-3">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Textilien+%26+Bekleidung">Textilien &amp; Bekleidung</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Textilien+%26+Bekleidung%E2%9E%A1Accessoires"><span class="icon icon-arrow-right"></span>Accessoires</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Textilien+%26+Bekleidung%E2%9E%A1Heimtextilien"><span class="icon icon-arrow-right"></span>Heimtextilien</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Textilien+%26+Bekleidung%E2%9E%A1Str%C3%BCmpfe"><span class="icon icon-arrow-right"></span>Strümpfe</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Textilien+%26+Bekleidung%E2%9E%A1Taschen+%26+Gep%C3%A4ck"><span class="icon icon-arrow-right"></span>Taschen &amp; Gepäck</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Elektronik+%26+Zubeh%C3%B6r">Elektronik &amp; Zubehör</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Elektronik+%26+Zubeh%C3%B6r%E2%9E%A1Audio-%2C+TV-+%26+PC-Zubeh%C3%B6r"><span class="icon icon-arrow-right"></span>Audio-, TV- &amp; PC-Zubehör</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Elektronik+%26+Zubeh%C3%B6r%E2%9E%A1Lampen+%26+Leuchtmittel"><span class="icon icon-arrow-right"></span>Lampen &amp; Leuchtmittel</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Elektronik+%26+Zubeh%C3%B6r%E2%9E%A1Wasseraufbereitung"><span class="icon icon-arrow-right"></span>Wasseraufbereitung</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit">Hobby &amp; Freizeit</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1B%C3%BCro-+%26+Schulzubeh%C3%B6r"><span class="icon icon-arrow-right"></span>Büro- &amp; Schulzubehör</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1Karten-+%26+Geschenkpapier"><span class="icon icon-arrow-right"></span>Karten- &amp; Geschenkpapier</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1KFZ+%26+Fahrrad"><span class="icon icon-arrow-right"></span>KFZ &amp; Fahrrad</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1Mal-+%26+Bastelutensilien"><span class="icon icon-arrow-right"></span>Mal- &amp; Bastelutensilien</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1Partybedarf"><span class="icon icon-arrow-right"></span>Partybedarf</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Nonfood%E2%9E%A1Hobby+%26+Freizeit%E2%9E%A1Schreibger%C3%A4te"><span class="icon icon-arrow-right"></span>Schreibgeräte</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li>
+                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere">Garten &amp; Tiere</a>
+                                <ul class="navigation-sub navigation-3level nav-col-5">
+                                    <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tiernahrung">Tiernahrung</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tiernahrung%E2%9E%A1Hundenahrung"><span class="icon icon-arrow-right"></span>Hundenahrung</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tiernahrung%E2%9E%A1Katzennahrung"><span class="icon icon-arrow-right"></span>Katzennahrung</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tiernahrung%E2%9E%A1Kleintiernahrung"><span class="icon icon-arrow-right"></span>Kleintiernahrung</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tiernahrung%E2%9E%A1Vogelfutter"><span class="icon icon-arrow-right"></span>Vogelfutter</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tierzubeh%C3%B6r">Tierzubehör</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Tierzubeh%C3%B6r%E2%9E%A1Tierhygieneartikel"><span class="icon icon-arrow-right"></span>Tierhygieneartikel</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Pflanzen">Pflanzen</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Pflanzen%E2%9E%A1Floristenbedarf"><span class="icon icon-arrow-right"></span>Floristenbedarf</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Gartenzubeh%C3%B6r">Gartenzubehör</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Gartenzubeh%C3%B6r%E2%9E%A1Bew%C3%A4sserung"><span class="icon icon-arrow-right"></span>Bewässerung</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Gartenzubeh%C3%B6r%E2%9E%A1Grillger%C3%A4te+%26+Zubeh%C3%B6r"><span class="icon icon-arrow-right"></span>Grillgeräte &amp; Zubehör</a>
+                                                            </li>
+                                                        <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Gartenzubeh%C3%B6r%E2%9E%A1Weitere+Gartenutensilien"><span class="icon icon-arrow-right"></span>Weitere Gartenutensilien</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        <li class="navigation-3level">
+                                                <h4><a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Blumen">Blumen</a></h4>
+                                                <ul class="navigation-4level">
+                                                    <li>
+                                                                <a href="/boecker/products?categoryFilter=%E2%9E%A1Garten+%26+Tiere%E2%9E%A1Blumen%E2%9E%A1Str%C3%A4u%C3%9Fe"><span class="icon icon-arrow-right"></span>Sträuße</a>
+                                                            </li>
+                                                        </ul>
+                                            </li>
+                                        </ul>
+                            </li>
+                        <li class="more">
+                            <a href="javascript:;"><em class="icon icon-arrow-down"></em></a>
+                            <ul id="overflow"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+</div>
+</header>
+<section id="content" class="content-category">
+    <div class="content-element">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <h1>Hauptkategorien<span> (1)</span></h1>
+                </div>
+                <div class="col-lg-8 col-md-8 col-xs-8 right">
+                    <div class="pagination_holder pagination_top">
+                        <div class="form-group">
+                            <span class="pagination_text hidden-xs hidden-sm">
+                                Artikel pro Seite</span>
+                            <span class="pagination_text visible-xs visible-sm">
+                                Artikel/Seite</span>
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
+                                    20<span class="icon icon-arrow-down"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=20">20</a></li>
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=50">50</a></li>
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=100">100</a></li>
+                                    </ul>
+                            </div>
+                            <span class="pagination_text hidden-xs hidden-sm">
+                                Sortieren nach:</span>
+                            <span class="pagination_text visible-xs visible-sm">
+                                Sortieren:</span>
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
+                                   -<span class="icon icon-arrow-down"></span>
+                                </button>
+                                
+                                
+                                <ul class="dropdown-menu">
+                    
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041">-</a></li>
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productArtikelbezeichnung">A-Z</a></li>
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productPriceIncTax">Preis</a></li>
+                                	</ul>
+                            </div>
+                            <ul class="pagination">
+        <li class="disabled">
+                    <span>
+                        <i class="icon icon-arrow-left"></i>
+                        <span class="hidden-xs hidden-sm">
+                            zurück</span>
+                    </span>
+                </li>
+            <li class="active">
+                        <span>
+                            1</span>
+                    </li>
+                <li class="disabled">
+                    <span>
+                        <span class="hidden-xs hidden-sm">
+                            weiter</span>
+                        <i class="icon icon-arrow-right"></i>
+                    </span>
+                </li>
+            </ul>
+</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row filter-row">
+                <div class="filter-reset col-xs-4 col-md-2 col-lg-2">
+                	<a href="/boecker/products?query=3090291386041" class="iconlink-close">
+                        Alle Filter zurücksetzen</a>
+                </div>
+				
+				<div class="filter-chosen col-xs-8 col-md-10 col-lg-10">
+                	<span>Gewählte Filter:</span>
+                  	<div>
+                       	</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <form id="filter" class="product-filter col-xs-4 col-md-2 col-lg-2" method="get" ng-non-bindable>
+					<input type="hidden" name="categoryFilter" value="">
+					<input type="hidden" name="query" value="3090291386041">
+                    <div class="filter-categories">
+                        <div class="filter-header filter-categories-name">
+                            <p>Hauptkategorien</p>
+                        </div>
+                        <div class="filter-header">    
+                            </div>
+
+                        <ul class="list-unstyled">
+                        	<li><a href="/boecker/products?categoryFilter=%E2%9E%A1K%C3%BChlprodukte&amp;query=3090291386041">Kühlprodukte<span> (1)</span></a></li>
+                        	</ul>
+                    </div>
+
+                    <div class="filter-brand">
+                        <div class="filter-header">
+                            <span>Marke</span>
+                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
+                                löschen</a>
+                        </div>
+
+                        <ul id="brands-list" class="list-unstyled show-first" data-show-first-count="8" data-show-first-control-template='&lt;li&gt;&lt;a class="iconlink-plus show-first-control" href="#"&gt;Mehr Auswahl&lt;/a&gt;&lt;/li&gt;'>
+                        	<li>
+	                                <div class="form-group">
+	                                    <div class="checkbox">
+	                                        <input type="checkbox" id="shopMarkeFilter0" onchange="this.form.submit()" name="shopMarkeFilter" value="Fol Epi">
+	                                        <label for="shopMarkeFilter0">Fol Epi<span> (1)</span></label>
+	                                    </div>
+	                                </div>
+	                            </li>
+                        	</ul>
+                    </div>
+                    
+                    <div class="filter-angebote">
+                    	<div class="filter-header">
+                    		<span>Meine Produkte</span>
+                        	<a class="iconlink-close" href="/boecker/products?query=3090291386041">
+                            	löschen</a>
+                    	</div>
+                        <ul class="list-unstyled show-first">
+                            <li>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="frequentlyOrderedFilter" name="frequentlyOrderedFilter" onchange="this.form.submit()" value="true">
+                                        <label for="frequentlyOrderedFilter">häufig bestellt<span></span></label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="filter-price">
+                        <div class="filter-header">
+                            <span>Preis in €</span>
+
+                            
+                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
+                            	löschen</a>
+                        </div>
+
+                        <div class="form-group input-group-sm clearfix">
+                            <input type="text" id="filter-price-range-start" class="form-control pull-left" maxlength="10" name="minPrice" value="">
+                            <span>bis:</span>
+                            <input type="text" id="filter-price-range-end" class="form-control pull-right" maxlength="10" name="maxPrice" value="">
+                        </div>
+
+                        <div class="form-group">
+                        	<button type="submit" class="btn btn-primary btn-xs">aktualisieren</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-angebote">
+	                        <div class="filter-header">
+	                            <span>Angebote</span>
+	                            <a class="iconlink-close" href="/boecker/products?query=3090291386041">
+	                                löschen</a>
+	                        </div>
+	                        <ul class="list-unstyled show-first">
+	                            <li>
+	                                <div class="form-group">
+	                                    <div class="checkbox angebot-filter">
+	                                        <input type="checkbox" id="angebotFilter" name="angebotFilter" onchange="this.form.submit()" disabled value="true">
+	                                        <label for="angebotFilter">Angebote<span> (0)</span></label>
+	                                    </div>
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </div>
+                    </form>
+                <div class="product-list col-xs-8 col-md-10 col-lg-10 ">
+                    <div edeka-product-teaser product='{"productId":109511,"extendedGewichtsartikel":false,"standardStueckgewicht":0,"availableGewichtsartikelProduktformen":[],"priceIncTax":"2,19 €","specialOfferPriceIncTax":null,"grundpreisIncTax":"1,46 €","specialOfferGrundpreisIncTax":null}' class="product-item
+                                    ">
+
+						<div edeka-modal="gewichtsartikelAlreadyInBasketModal109511" class="gewichtsartikel-already-in-basket-modal modal fade" id="gewichtsartikel-already-in-basket-modal" role="dialog">
+							<div class="modal-dialog modal-max">
+    <div class="modal-content">
+    	<div class="modal-header clearfix">
+        	<button type="button" class="close" data-dismiss="modal"><em class="icon-close"></em></button>
+            <h2 class="modal-title">Produkt bereits im Warenkorb</h2>
+        </div>
+        <p>
+            Sie haben von diesem Produkt bereits {{existingWeightProductInBasketWithDifferentWeight.quantity}}x 
+            {{existingWeightProductInBasketWithDifferentWeight.stueckgewicht}}g 
+            {{existingWeightProductInBasketWithDifferentWeight.selectedGewichtsartikelProduktform | messages:'gewichtsartikelProduktform'}} im Warenkorb liegen.<br><br>
+            Möchten Sie diese Auswahl verwerfen und stattdessen Ihre aktuelle übernehmen?
+        </p>
+
+        <div class="modal-action-buttons">
+			<a class="btn btn-primary" type="button" data-dismiss="modal">
+				Abbrechen
+			</a>
+
+			<a class="btn btn-primary pull-right" type="button" ng-click="replaceProduct()">
+				Aktuelle Auswahl übernehmen
+			</a>
+		</div>
+    </div>
+</div>
+</div>
+                            <div class="product-flag-holder">
+                            	</div>
+                            <a class="img-holder" href="/boecker/products/fol-epi-classic-50-fett-i-tr-150g-109511">
+                                <img src="/product-images/product-images/epim/20150707201322200/image172x172" alt="Fol Epi Classic 50% Fett i.Tr.150g">
+                                    </a>
+
+							<div class="product-content" ng-class="{'extended-gewichts-artikel': product.extendedGewichtsartikel}">
+	                        	
+                            	<div class="product-label label-empty"> </div>
+                            	<a class="product-title" href="/boecker/products/fol-epi-classic-50-fett-i-tr-150g-109511">
+                                   <strong>Fol Epi Classic 50% Fett i.Tr.150g</strong>
+                                </a>
+                                <div class="base-price">
+	                                		Grundpreis: 1.46 € / 100 g</div>
+	                                <div class="base-price">
+								    </div>
+
+
+                                <div class="product-price">
+	                               	<edeka-product-price-holder></edeka-product-price-holder>
+                                </div>
+
+                                <div class="product-to-cart">
+
+                                <div class="stepper">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-sm">
+                                                <button ng-click="decreaseQuantity()" ng-class="{disabled: !isDecreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-minus"></span>
+                                                </button>
+                                                <input ng-model="quantity" ng-blur="onQuantityChange()" class="form-control input-sm" type="text" value="1">
+                                                <button ng-click="increaseQuantity()" ng-class="{disabled: !isIncreaseQuantityAllowed()}" class="btn btn-input btn-sm" type="button">
+                                                    <span class="glyphicons glyphicon-plus"></span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button ng-click="addToBasket()" class="btn btn-primary btn-sm btn-to-cart" type="button" edeka-add-to-basket-popover data-content="Artikel wurde in den Warenkorb gelegt" data-placement="top">
+                                        <span class="icon-cart"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+						<!--  EDEKA-1531: Teaser in Suchergebnissen bei definierten Kategorien -->
+					<!-- 
+                    <div class="product-item product-item-extend item-last-lg item-last-sm item-last-md ">
+                    	<img class="teaser-img" src="/img/teaser_bio.jpg" alt="Teaser Bio">
+	                        <div class="teaser-content">
+	                            <img alt="Biologo" src="/img/bio.png" class="bio-logo">
+	                            <div class="teaser-text">
+	                            <h2>Beste Bio Produkte</h2>
+	                            <p>
+	                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+	                            </p>
+	                            </div>
+	                            <div class="teaser-link">
+	                                <a class="iconlink-arrow-right" href="#">Bio-Produkte</a>
+	                            </div>
+	                        </div>
+                    </div>
+                     -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                </div>
+                <div class="col-lg-8 col-md-8 col-xs-8 right">
+                    <div class="pagination_holder pagination_bottom">
+                        <div class="form-group">
+                            <span class="pagination_text hidden-xs hidden-sm">
+                                Artikel pro Seite</span>
+                            <span class="pagination_text visible-xs visible-sm">
+                                Artikel/Seite</span>
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
+                                    20<span class="icon icon-arrow-down"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=20">20</a></li>
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=50">50</a></li>
+                                    <li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;pageSize=100">100</a></li>
+                                    </ul>
+                            </div>
+                            <span class="pagination_text hidden-xs hidden-sm">
+                                Sortieren nach:</span>
+                            <span class="pagination_text visible-xs visible-sm">
+                                Sortieren:</span>
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-xs btn-icon-right dropdown-toggle" type="button" data-toggle="dropdown">
+                                   -<span class="icon icon-arrow-down"></span>
+                                </button>
+                                
+                                
+                                <ul class="dropdown-menu">
+                    
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041">-</a></li>
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productArtikelbezeichnung">A-Z</a></li>
+                                	<li><a tabindex="-1" href="/boecker/products?query=3090291386041&amp;sortBy=productPriceIncTax">Preis</a></li>
+                                	</ul>
+                            </div>
+                            
+                           <ul class="pagination">
+        <li class="disabled">
+                    <span>
+                        <i class="icon icon-arrow-left"></i>
+                        <span class="hidden-xs hidden-sm">
+                            zurück</span>
+                    </span>
+                </li>
+            <li class="active">
+                        <span>
+                            1</span>
+                    </li>
+                <li class="disabled">
+                    <span>
+                        <span class="hidden-xs hidden-sm">
+                            weiter</span>
+                        <i class="icon icon-arrow-right"></i>
+                    </span>
+                </li>
+            </ul>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><footer>
+    <div class="container">
+        <div class="footer-inner">
+        	<div class="row"> 
+	        	<div class="col-xs-12">
+	    	      	<div class="row">
+						<div class="col-xs-12 text-center">
+							<h2>
+		    					Kostenlose
+								Service-Hotline 0800 1301305  / <span class="phone">Montag - Samstag: 08:00 - 20:00 Uhr</span>
+							</h2>
+						</div>
+					</div>
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+		                    <ul class="list-unstyled list-inline list-benefits">
+		                        <li>Knackige Angebote<em class="icon icon-ok"></em></li>
+		                        <li>Frische Neuheiten<em class="icon icon-ok"></em></li>
+		                        <li>Persönliche Services<em class="icon icon-ok"></em></li>
+		                    </ul>
+		                </div>
+		            </div>
+				</div>
+			</div>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-3 col-xs-4">
+                    <ul class="list-unstyled list-meta">
+                        <li><span>Über EDEKA</span></li>
+                        <li>
+                            <a target="_blank" href="http://www.edeka-verbund.de/Unternehmen/de/edeka_verbund/verbundsprofil/verbund/verbund_1.jsp">
+                                Unternehmen</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://www.edeka-verbund.de/Unternehmen/de/karriere/berufseinstiegbeiedeka.jsp">
+                                Karriere und Ausbildung</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://www.edeka-verbund.de/Unternehmen/de/presse/startseite/startseite.jsp">
+                                Presse</a>
+                        </li>
+                        <li><a href="/boecker/about">Impressum</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <ul class="list-unstyled list-meta">
+                        <li><span>Service</span></li>
+                        <li><a href="/boecker/faq">Häufig gestellte Fragen (FAQ)</a></li>
+<li><a href="/boecker/contact-form">Kontakt</a></li>
+                        <li><a href="/boecker/tac">AGB</a></li>
+                        <li><a href="/boecker/cancellation-policy">Widerrufsbelehrung</a></li>
+                        <li><a href="/boecker/privacy">Datenschutz</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <ul class="list-unstyled list-meta">
+                         <li><span>Zahlungsarten</span></li>
+                         <li>Barzahlung</li>
+						 <li>EC-Karte</li>
+						 <li>Rechnung</li>
+						 </ul>
+                </div>
+                
+                <div class="col-md-3 col-xs-4">
+                    <ul class="list-unstyled list-meta">
+                        <li><span>Soziale Netzwerke</span></li>
+	                    <li class="social-fb">
+	                        <a target="_blank" href="https://www.facebook.com/Edeka?refid=9#_=_">
+	                            Facebook</a>
+	                    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-8">
+                    <div class="form-nl-signup-wrap newsletter">
+                        <span class="meta-heading">Newsletter</span>
+                        <p>Jetzt anmelden und viele Vorteile sichern</p>
+                        <form class="form-inline form-nl-signup" ng-controller="newsletterFormController" ng-submit="subscribe(newsletterForm, 'newsletterSubscribeFeedbackMessageModal')" name="newsletterForm" id="newsletter-subscribing-form" role="form" novalidate>
+                            <div class="form-group">
+								
+                                <div class="input-group input-group-sm" ng-class="{'has-warning': showValidationError(newsletterForm, newsletterForm.email)}">
+                                    <input class="form-control input-sm" required ng-pattern="/^(\S+)@(\S+)\.(\S+)$/" name="email" id="newsletter-form-email" placeholder="Bitte E-Mail Adresse eingeben" ng-model="subscribeData.email">
+                                    <span class="input-group-btn">
+                                    	<button type="submit" class="btn btn-primary">
+                                        	<em class="icon icon-arrow-right"></em>
+                                    	</button>
+                                	</span>
+                                    
+                                </div>
+                                <span ng-show="showValidationError(newsletterForm, newsletterForm.email, 'required')" class="warning">
+				                	Bitte gültige E-Mail Adresse eingeben.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 visible-xs visible-sm">
+                    <hr>
+                </div>
+
+                <div class="col-md-8 col-xs-10 legals">
+                    <p ng-class="{deliveryWindow: deliveryWindowInfo.selectedDeliveryWindow != nul}">
+                        Alle Preise in Euro, inkl. gesetzlicher Mehrwertsteuer zuzüglich <a ng-controller="deliveryWindowOpenViewController" ng-click="openDeliveryWindowView()" href="javascript:;">Liefer-/ Abholgebühr</a><!-- avoid space after url 
+                     -->, Pfand und evtl. Kistenzuschlag.<br>
+                        Produktabbildungen können abweichen. Verkauf ohne Dekoration.</p>
+                </div>
+                <div class="col-md-1 col-xs-2">
+                    <a href="/boecker">
+                        <img src="/img/edeka_logo_1.jpg" title="This site was served by wwwp32.web.edeka.net" class="img-responsive pull-right logo" alt="Edeka">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/ng-template" id="/confirm.html">
+    <div class="modal-header clearfix">
+        <button type="button" 
+        		class="close"
+				ng-click="cancel()">
+        	<i class="icon-close"></i>
+        </button>
+        <h2 class="modal-title">
+			Bestätigung
+		</h2>
+    </div>
+    <div class="modal-body">
+	    <p>
+			{{data.text}}
+	    </p>
+	</div>
+	<div class="modal-footer">
+	  	<button class="btn btn-primary"
+	            type="button"
+	            ng-click="ok()">
+				Ja
+		</button>
+		<button class="btn btn-primary"
+	            type="button"
+	            ng-click="cancel()">
+				Abbrechen
+		</button>
+	</div>
+</script><div class="modal fade" edeka-modal="newsletterSubscribeFeedbackMessageModal" id="newsletter-subscribe-feedback-message-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header clearfix">
+                <button type="button" class="close" data-dismiss="modal"><span class="icon-close"></span></button>
+                <h2 class="modal-title">Newsletter</h2>
+                <p>
+                    Vielen Dank für Ihre Newsletterregistrierung.
+                </p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">
+                        Schließen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" edeka-modal="newsletterUnsubscribeFeedbackMessageModal" id="newsletter-unsubscribe-feedback-message-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+			<div class="modal-header clearfix">
+                <button type="button" class="close" data-dismiss="modal"><span class="icon-close"></span></button>
+                <h2 class="modal-title">Newsletter</h2>
+                <p>
+                	Sie wurden aus unserem Newsletter abgemeldet.
+                </p>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">
+                        Schließen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
