@@ -1,0 +1,177 @@
+/* Reset */
+@import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
+
+html,
+body,
+div {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 12px;
+}
+
+body {
+  background-color: #e6e6e6;
+}
+
+/* Box-sizing border-box */
+* {
+  box-sizing: border-box;
+}
+
+/* Set up a default font and some padding to provide breathing room */
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 20px;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+ul {
+  margin: 10px 0 0 0;
+  padding: 0 0 0 20px;
+}
+
+li {
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+input {
+  /*border: 1px solid #106cc8;*/
+  font-size: 14px;
+  height: 30px;
+  outline: none;
+  padding: 8px;
+}
+
+button {
+  background-color: #106cc8;
+  border-style: none;
+  color: rgba(255, 255, 255, 0.87);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  height: 40px;
+  padding: 8px 18px;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: #28739e;
+}
+
+.app-container {
+  /*background-color: #e6e6e6;*/
+  margin-top: 2.5em;
+}
+
+.button-panel {
+  text-align: right;
+    padding-right: 2em;
+}
+
+.detail-panel {
+  background-color: #e6e6e6;
+  margin: 1em 2em 2em 2em;
+}
+
+.inline-item {
+  display: flex;
+  background-color: #ffffff;
+}
+
+.detail-logo {
+  /*background: url('../../../assets/logo.jpg') left center no-repeat;*/
+  /*background-size: cover;*/
+  /*width: 80px;*/
+  /*height: 40px;*/
+}
+
+.logo {
+  width: 100%;
+  height: 42px;
+}
+
+.circle-image {
+  width: 20px;
+  background: #1ad81a;
+  /*background-size: cover;*/
+  border-radius: 50%;
+  height: 20px;
+  margin: auto;
+}
+
+.detail-header-text {
+  height: 3em;
+  font-size: 1em;
+  line-height: 3em;
+  width: 100%;
+  padding-left: 1em;
+  color: white;
+}
+
+.detail-header-text span {
+  background-color: grey;
+  height: 5em;
+}
+
+.detail-header-white-text {
+  background-color: white;
+  color: grey;
+  height: 3em;
+  font-size: 1em;
+  line-height: 3em;
+}
+
+.detail-product-item {
+  border-left: 1px;
+  /*background-color: grey;*/
+  height: 100%;
+  padding: 0;
+  /*width: 50%;
+  position: relative;*/
+}
+
+.image-panel {
+  width: 100%;
+  height: 120px;
+  background-color: #ffffff;
+}
+
+.detail-info {
+  padding-top: 1em;
+}
+
+.item-detail {
+  height: 30px;
+  padding: 8px;
+}
+
+.item-row {
+  padding-top: 10px;
+}
+.item-description {
+  padding-left: 8px;
+  /*background-color: #1f801f;*/
+  /*color: #ffffff;*/
+}
+
+.select-site {
+
+}
+
+.last-crawled-time {
+  cursor: default;
+}

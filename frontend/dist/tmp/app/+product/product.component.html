@@ -1,0 +1,124 @@
+<div class="container-fluid app-container">
+	<div class="button-panel row">
+		<div class="col-sm-3 col-xs-5">
+			<span class="col-sm-1 caret-left"></span>
+			<div class="col-sm-10 btn label-default last-crawled-time">{{currentData.created}}==={{currentData.sku}}</div>
+		</div>
+		<!-- <div class="col-sm-4"></div> -->
+		<div class="col-sm-6 col-xs-6 pull-right">
+			<div class="btn btn-warning">Entwurf Speichern</div>
+			<div class="btn btn-success">Veröffentlichen</div>
+		</div>
+	</div>
+	<div class="detail-panel">
+		<div class="col-sm-6 detail-product-item">
+			<div class="row" style="border:1px solid; border-color: #c5bebe;">
+				<div class="col-sm-3 col-xs-3 detail-logo" style="padding: 0;">
+					<img src="../../assets/logo.jpg" class="logo" />
+				</div>
+				<div class="col-sm-9 col-xs-9 inline-item">
+					<div class="circle-image"></div>
+					<div class="detail-header-text">
+						<span>sku_data <i class="caret"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="detail-info">
+				<div class="row">
+					<div class="col-sm-4">
+						<img class="image-panel" alt="current image" src="" />
+					</div>
+					<div class="col-sm-8">
+						<div class="item-detail">{{ apiCurrentData.brand }}</div>
+						<div class="item-detail">{{ apiCurrentData.name }}</div>
+						<div class="item-detail">{{ apiCurrentData.weight }} (baseUnit/base/Weight)</div>
+						<div class="item-detail">varPercent</div>
+					</div>
+				</div>
+				<div class="item-row">
+					<label>Description</label>
+					<div class="item-description">{{ apiCurrentData.description }}</div>
+				</div>
+				<div class="item-row">
+					<label>manufacture</label>
+					<div class="item-description">{{ apiCurrentData.manufacturer }}</div>
+				</div>
+				<div class="item-row">
+					<label>ingredients</label>
+					<div class="item-description">{{ apiCurrentData.ingredients }}</div>
+				</div>
+				<div class="item-row">
+					<label>allergens & additives</label>
+					<div class="item-description"></div>
+				</div>
+				<div class="item-row">
+					<label>nutirents</label>
+					<div class="item-description" *ngFor="let i of apiCurrentData.nutrients | dictToList">
+						<div class="col-sm-6">{{ i.name }}</div>
+						<div class="col-sm-6">{{ i.perUnit }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 detail-product-item" style="">
+			<div class="row" style="border:1px solid; border-color: #c5bebe;">
+				<div class="col-sm-4 col-xs-4 detail-select-site">
+					<div class="dropdown" id="select-site">
+					  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">EDEKA
+					  <span class="caret"></span></button>
+					  <ul class="dropdown-menu">
+					    <li><a href="#">EDEKA</a></li>
+					    <li><a href="#">MY TIME</a></li>
+					    <li><a href="#">LIFE</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div class="col-sm-8 col-xs-8 detail-header-white-text">Crawled: {{currentData.created}}</div>
+			</div>
+			<div class="detail-info">
+				<div class="row">
+					<div class="col-sm-4">
+						<img class="image-panel" alt="current image" src="../../assets/product_images/{{currentData.sku}}.png" />
+					</div>
+					<div class="col-sm-8">
+						<input type="text" class="item-detail form-control" placeholder="brand" [(ngModel)]="currentData.brand" />
+						<input type="text" class="item-detail form-control" placeholder="Product Name" [(ngModel)]="currentData.productName" />
+						<div class="item-detail" >{{ currentData.weight }}({{currentData.item_base}})</div>
+						<div class="item-detail">varPercent</div>
+					</div>
+				</div>
+				<div class="item-row">
+					<label>Description</label>
+					<div class="item-description">{{ currentData.description }}</div>
+				</div>
+				<div class="item-row">
+					<label>manufacture</label>
+					<div class="item-description">{{ currentData.manufacture }}</div>
+				</div>
+				<div class="item-row">
+					<label>ingredients</label>
+					<div class="item-description">{{ currentData.ingredient }}</div>
+				</div>
+				<div class="item-row">
+					<label>allergens & additives</label>
+					<div class="item-description">
+						<div>{{ currentData.allergens }}</div>
+						<div>{{ currentData.additives }}</div>
+					</div>
+				</div>
+				<div class="item-row">
+					<label>nutrients</label>
+					<div class="" *ngFor="let value of nutrients">
+						<div class="col-sm-6 col-xs-6" >
+							{{value.name}}
+						</div>
+						<div class="col-sm-6 col-xs-6 text-center">
+							{{value.perUnit}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>

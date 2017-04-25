@@ -1,0 +1,23 @@
+<div class="container-fluid app-container" >
+	<div class="button-panel">
+		<input type="button" class="btn btn-default" value="end" (click)="onEndScrapy()">
+		<input type="button" class="btn btn-success" value="start" (click)="onStartScrapy()">
+	</div>
+	<div class="detail-panel">
+		<table class="table table-striped">
+			<thead>
+				<th>EAN</th>
+				<th>Name</th>
+				<th>Quellen</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of scrapedData">
+					<td>{{ item.sku }}</td>
+					<td>{{ item.productName }}</td>
+					<td>{{ item.weight }}</td>
+					<td><a class="glyphicon glyphicon-arrow-right" [attr.data-value]="item.sku" (click)="productDetail(item.sku)" [routerLink]="['/product', item.sku]"></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
